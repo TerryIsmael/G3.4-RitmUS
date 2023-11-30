@@ -3,9 +3,9 @@ from django.contrib.auth.models import User
 from enum import Enum
 
 class status(Enum):
-    PENDING = 'PENDING'
-    IN_PROGRESS = 'IN_PROGRESS'
-    RESOLVED = 'RESOLVED'
+    PENDING = 'Pendiente'
+    IN_PROGRESS = 'En progreso'
+    RESOLVED = 'Resuelta'
 
 class Incidence(models.Model):
     status = models.CharField(max_length=50,choices=[state.value for state in status])
