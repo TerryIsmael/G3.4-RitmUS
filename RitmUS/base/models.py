@@ -31,7 +31,7 @@ class Song(models.Model):
     genre = models.CharField(max_length=50)
     album = models.CharField(max_length=50)
     duration = models.IntegerField()
-    image = models.ImageField(upload_to='photos/%Y/%m/%d/')
+    image = models.ImageField(upload_to='static/img/')
     release_date = models.DateTimeField(auto_now_add=True)
     file_url = models.CharField(max_length=200)
     playlist = models.ForeignKey(Playlist, on_delete=models.CASCADE)
