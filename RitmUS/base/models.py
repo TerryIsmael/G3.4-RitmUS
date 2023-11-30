@@ -1,8 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
+from enum import Enum
+
+class status(Enum):
+    PENDING = 'PENDING'
+    IN_PROGRESS = 'IN_PROGRESS'
+    RESOLVED = 'RESOLVED'
 
 class Incidence(models.Model):
-    status = models.CharField(max_length=50)
+    status = models.CharField(max_length=50,choices=[state.value for state in status])
     description = models.TextField(max_length=500)
     date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
