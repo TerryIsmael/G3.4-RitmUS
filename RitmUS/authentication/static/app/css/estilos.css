@@ -1,0 +1,290 @@
+
+* {
+    margin:0;
+    padding:0;
+}
+
+body {
+    background-color: #EDF2F7;
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+header {
+    width: 100%;
+    height: 80px;
+    background-color: #2B6CB0;
+    display: flex;
+}
+
+header > div {
+    width: 50%;
+}
+
+.galeria {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 30px;
+}
+
+.galeria img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+
+input[type=text], input[type=email], select, textarea {
+    width: 100%;
+    padding: 5px 10px;
+}
+
+.button {
+    padding: 5px 10px;
+    border: none;
+    color:white;
+    border-radius: 5px;
+}
+
+.button.primary {
+    background-color: #2B6CB0;
+}
+
+.button.secondary {
+    background-color: #4A5568;
+}
+
+
+.contenedor_logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 100px;
+    margin-left: 20px;
+}
+
+nav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+}
+
+nav > ul {
+    margin-right: 20px;
+}
+
+nav > ul > li {
+    display: inline;
+    margin-left: 10px;
+}
+
+nav > ul > li > a {
+    color:white;
+    text-decoration: none;
+}
+
+
+#contenido {
+    width: 80%;
+    margin: auto;
+    max-width: 1280px;
+    min-height: 80vh;
+}
+
+.productos {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+@keyframes animacion_producto_desktop {
+    0% {
+        transform: rotate(-20deg);
+        opacity: 0;
+    }
+
+    100% {
+        transform: rotate(0);
+        opacity: 1;
+    }
+}
+
+
+.productos .producto {
+    width: 25%;
+    margin-top: 15px;
+    animation: animacion_producto_desktop 0.5s;
+}
+
+.productos .producto img {
+    width: 80%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.productos .producto .contenedor_producto {
+    background-color: white;
+    width: 80%;
+    margin:auto;
+}
+
+.productos .producto .detalles {
+    padding: 5px;
+}
+
+
+/*FOOTER*/
+
+footer {
+    width: 100%;
+    height: 300px;
+    background-color: #2D3748;
+}
+
+footer .marcas {
+    width: 100%;
+    height: 100px;
+    background-color: #4A5568;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+footer .marcas img {
+    width: 50px;
+}
+
+footer .logo_footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:calc(100% - 100px);
+}
+
+footer .logo_footer img {
+    width: 100px;
+}
+
+.menu {
+    width: 40px;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    display: none;
+}
+
+label.error {
+    color: darkred;
+}
+
+input.error {
+    border: 2px solid darkred;
+}
+
+
+/*MEDIA QUERIES*/
+
+/*TABLET*/
+
+@media(max-width:1024px) {
+
+    .galeria {
+        grid-template-columns:1fr 1fr;
+    }
+
+    @keyframes animacion_producto_tablet {
+
+        0% {
+            opacity: 0;/*0-1*/
+        }
+
+        100% {
+            opacity: 1;
+        }
+
+    }
+
+    .productos .producto {
+        width: 50%;
+        animation: animacion_producto_tablet 2s;
+    }
+
+}
+
+/*SMARTPHONE*/
+@media(max-width:480px) {
+
+    .galeria {
+        grid-template-columns: 1fr;
+    }
+
+    .menu {
+        display: block;
+    }
+
+    @keyframes animacion_producto_smartphone {
+
+        0% {
+            transform: scale(0.1);/*0 - 1*/
+        }
+
+        80%{
+            transform: scale(1.05);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+
+
+    .productos .producto {
+        width: 100%;
+        animation: animacion_producto_smartphone 0.8s;
+    }
+
+    header {
+        flex-direction: column;
+        height: 60px;
+        transition: all 0.8s;
+        /*position: fixed;
+        left:0;
+        top:0;*/
+        overflow: hidden;
+    }
+
+    #contenido {
+        margin-top: 60px;
+    }
+
+    header > div {
+        width: 100%;
+    }
+
+    nav {
+        justify-content: center;
+    }
+
+    .contenedor_logo {
+        justify-content: center;
+    }
+
+    .logo {
+        margin-top: 15px;
+    }
+
+    nav > ul {
+        margin-right: 0;
+    }
+
+    nav > ul > li {
+        display: block;
+        margin:0;
+        text-align: center;
+        padding: 20px 0;
+    }
+
+}
+
