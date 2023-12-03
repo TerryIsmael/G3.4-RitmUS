@@ -1,9 +1,12 @@
 from django import forms
-#from .models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+
+class CustomUserLoginForm(AuthenticationForm):
+    email = forms.EmailField(widget=forms.TextInput(attrs={'autofocus': True}))
 
 class CustomUserCreationForm(UserCreationForm):
-    pass
-   # class Meta:
-    #    model = User
-     #   fields = ('username', 'email', 'first_name', 'last_name')
+
+   class Meta:
+        model = User
+        fields = ('username', 'email', 'first_name', 'last_name')
