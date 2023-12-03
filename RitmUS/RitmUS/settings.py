@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["localhost","127.0.0.1"]
 
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 # Application definition
 
@@ -42,6 +44,8 @@ INSTALLED_APPS = [
     'library',
     'authentication',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
