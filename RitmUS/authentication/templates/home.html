@@ -2,9 +2,24 @@
 
 {% load static %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Tienda{% endblock %}
 
 {% block content %}
-    <h2>Home</h2>
-    <p>Bienvenido {{ user.username }}!</p>
+    <h2>Listas de Canciones</h2>
+    <div class="productos">
+        {% for p in playlists %}
+        <div class="producto">
+            <div class="contenedor_producto">
+                
+                <img src="{{ p.image.url }}" alt="imagen producto">
+                
+                <div class="detalle">
+                    <h5>{{ p.genre }}</h5>
+                    <h2>{{ p.name }}</h2>
+                    <h3>{{ p.price }}€</h3>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 {% endblock %}
