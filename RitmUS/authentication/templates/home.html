@@ -5,6 +5,21 @@
 {% block title %}Tienda{% endblock %}
 
 {% block content %}
+
+    <form class="buscador" method="get" action="{% url 'playlist_search' %}">
+        <input class="ibuscador" type="text" name="search" id="search">
+        
+        <button class="buscarbutton"type="submit">Buscar</button>
+        
+        <select class="selector"  name="price_range" id="price_range">
+            <option value="">Selecciona un rango de precio</option>
+            <option value="0-10">0€/mes - 10€/mes</option>
+            <option value="10-20">10€/mes - 20€/mes</option>
+            <option value="20-30">20€/mes - 30€/mes</option>
+        </select>
+
+    </form>
+
     <h2>Listas de Canciones</h2>
     <div class="productos">
         {% for p in playlists %}
