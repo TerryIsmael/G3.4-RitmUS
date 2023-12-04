@@ -2,15 +2,15 @@
 
 {% load static %}
 
-{% block title %}Tienda{% endblock %}
+{% block title %}Biblioteca{% endblock %}
 
 {% block content %}
-    <h2>Listas de Canciones</h2>
+    <h2>Tu biblioteca</h2>
     <div class="productos">
         {% for p in playlists %}
         
         <div class="producto">
-            <a href="{% url 'playlist_detail' pk=p.pk %}" class="detalles">    
+            <a href="{% url 'library_playlist_detail' pk=p.pk %}" class="detalles">    
                 <div class="contenedor_producto">
                 
                     <img src="{{ p.image.url }}" alt="imagen producto">
