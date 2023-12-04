@@ -14,12 +14,8 @@ def playlist_detail(request, pk):
     return render(request, 'playlist_details.html', datos)
 
 def playlist_search(request):
-    playlists = Playlist.objects.all()
-    datos = {'playlists': playlists}
     query=get_queryset(request)
-    print (query)
-    if query:
-        datos = {'playlists': query}
+    datos = {'playlists': query}
     return render(request, 'home.html', datos)
 
 
@@ -32,5 +28,4 @@ def get_queryset(request):
         if price_range:
             min_price, max_price = map(int, price_range.split('-'))
             queryset2 &= Playlist.objects.filter(price__gte=min_price, price__lte=max_price)
-        
         return queryset2

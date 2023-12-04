@@ -358,14 +358,14 @@ input.error {
     width: 100%;
     padding: 10px;
     border-radius: 6px;
-    height: 30px;
+    height: 33px;
     border: 3px solid #671c1c;
     font-size: 16px;
 }
 
 .buscarbutton {
     width: 100px;
-    height: 30px;
+    height: 33px;
     border-radius: 6px;
     border: 3px solid #671c1c;
     background-color: #671c1c;
@@ -376,7 +376,7 @@ input.error {
 
 .selector {
     width: 60%;
-    height: 40px;
+    height: 33px;
     border: 3px solid #671c1c;
     border-radius: 6px;
     margin-left: 10px;
