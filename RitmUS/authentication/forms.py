@@ -1,12 +1,18 @@
 from django import forms
-from django.contrib.auth.models import User
+from .models import CustomUser as User
+#from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 class CustomUserLoginForm(AuthenticationForm):
-    email = forms.EmailField(widget=forms.TextInput(attrs={'autofocus': True}))
+    
+
+    def __init__(self, *args, **kwargs):
+        super(CustomUserLoginForm, self).__init__(*args, **kwargs)
+        self.fields['username'] = forms.EmailField(widget=forms.TextInput(attrs={'autofocus': True}))
+        self.fields['username'].label = "Correo electrónico"
 
 class CustomUserCreationForm(UserCreationForm):
-
-   class Meta:
+    email = forms.EmailField(required=True)
+    class Meta:
         model = User
         fields = ('username', 'email', 'first_name', 'last_name')

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -33,7 +34,9 @@ LOGOUT_REDIRECT_URL = '/'
 # Application definition
 
 INSTALLED_APPS = [
+    
     'django.contrib.admin',
+    'authentication',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -42,7 +45,6 @@ INSTALLED_APPS = [
     'ecommerce',
     'base',
     'library',
-    'authentication',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -111,7 +113,11 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es'
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'RitmUS', 'locale'),
+]
 
 TIME_ZONE = 'UTC'
 
@@ -129,3 +135,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+AUTH_USER_MODEL = 'authentication.CustomUser'
+AUTHENTICATION_BACKENDS = ['authentication.backends.CustomUserBackend']
