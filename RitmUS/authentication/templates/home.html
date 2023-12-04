@@ -23,23 +23,27 @@
 
     <h2>Listas de Canciones</h2>
     <div class="productos">
-        {% for p in playlists %}
-        
-        <div class="producto">
-            <a href="{% url 'playlist_detail' pk=p.pk %}" class="detalles">    
-                <div class="contenedor_producto">
-                
-                    <img src="{{ p.image.url }}" alt="imagen producto">
-                
-                    <div class="detalles">
-                        <h6>{{ p.genre }}</h6>
-                        <h2>{{ p.name }}</h2>
-                        <h5>{{ p.price }}€/mes</h5>
-                    </div>
-                </div>
-            </a>
+        {% if playlists %}
+            {% for p in playlists %}
             
-        </div>
-        {% endfor %}
+            <div class="producto">
+                <a href="{% url 'playlist_detail' pk=p.pk %}" class="detalles">    
+                    <div class="contenedor_producto">
+                    
+                        <img src="{{ p.image.url }}" alt="imagen producto">
+                    
+                        <div class="detalles">
+                            <h6>{{ p.genre }}</h6>
+                            <h2>{{ p.name }}</h2>
+                            <h5>{{ p.price }}€/mes</h5>
+                        </div>
+                    </div>
+                </a>
+                
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>No hay playlists que coincidan con tu búsqueda</p>
+        {% endif %}
     </div>
 {% endblock %}
