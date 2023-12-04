@@ -48,7 +48,7 @@ input[type=text], input[type=email], select, textarea {
 }
 
 .button.primary {
-    background-color: #2B6CB0;
+    background-color: rgb(145, 14, 14);
 }
 
 .button.secondary {
