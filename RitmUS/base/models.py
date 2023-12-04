@@ -8,11 +8,12 @@ class status(Enum):
     RESOLVED = 'Resuelta'
 
 class Incidence(models.Model):
-    #status = models.CharField(max_length=50,choices=[state.value for state in status])
-    status = models.CharField(max_length=50, choices=[(state.name, state.value) for state in status])
+    status = models.CharField(max_length=50, choices=[(state.name, state.value) for state in status], default=status.PENDING.name)
     description = models.TextField(max_length=500)
     date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    
+    
   
 class Playlist(models.Model):
     name = models.CharField(max_length=50)

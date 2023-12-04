@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Listado de incidencias{% endblock %}
+
+{% block content %}
+       <table class="table table-striped table-hover">
+        <tr>
+            <th>Estado</th>
+            <th>Descripción</th>
+         {% for incidence in incidences %}
+        <tr>
+            {% if incidence.status == "PENDING" %}
+            <td>Pendiente</td>
+            {% elif incidence.status == "IN_PROGRESS" %}
+            <td>En progreso</td>
+            {% elif incidence.status == "RESOLVED" %}
+            <td>Resuelta</td>
+            {% endif %}
+            <td>{{ incidence.description }}</td>
+        </tr>
+        {% endfor %}
+        </table>
+        <a href="{% url 'create_incidence' %}" class="btn btn-secondary">Crear incidencia</a>
+       
+
+{% endblock %}
