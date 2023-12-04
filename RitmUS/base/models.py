@@ -19,7 +19,7 @@ class Playlist(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
     price = models.IntegerField()
-    image = models.ImageField(upload_to='photos/%Y/%m/%d/')
+    image = models.ImageField(upload_to='static/img/')
     genre = models.CharField(max_length=50)
     is_active = models.BooleanField(default=True)
 
