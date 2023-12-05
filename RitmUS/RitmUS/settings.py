@@ -37,7 +37,6 @@ LOGOUT_REDIRECT_URL = '/'
 INSTALLED_APPS = [
     
     'django.contrib.admin',
-    'authentication',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -46,6 +45,7 @@ INSTALLED_APPS = [
     'ecommerce',
     'base',
     'library',
+    'customuser',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -138,5 +138,5 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-AUTH_USER_MODEL = 'authentication.CustomUser'
-AUTHENTICATION_BACKENDS = ['authentication.backends.CustomUserBackend']
+AUTH_USER_MODEL = 'customuser.CustomUser'
+AUTHENTICATION_BACKENDS = ['customuser.backends.CustomUserBackend']
