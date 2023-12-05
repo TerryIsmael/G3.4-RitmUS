@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from base.models import Order, Subscription, Playlist, Song
 from datetime import datetime, timezone, timedelta
@@ -8,13 +9,13 @@ import locale
 def index(request):
 
     orders = Order.objects.filter(user=request.user.id)
-    playlists_owned = []
+    active_subs = []
     
     for order in orders:
         subscriptions = Subscription.objects.filter(order=order)
-        playlists_owned = playlists_owned + [subscription.playlist for subscription in subscriptions if subscription.end_date > datetime.now(timezone.utc)]
- 
-    return render(request, 'index.html', {'playlists': playlists_owned})
+        active_subs = active_subs + [subscription for subscription in subscriptions if subscription.end_date > datetime.now(timezone.utc)]
+
+    return render(request, 'index.html', {'subscriptions': active_subs})
 
 @login_required
 def library_playlist_detail(request, pk):
@@ -28,3 +29,11 @@ def library_playlist_detail(request, pk):
     formatted_date = correct_date.strftime("%d/%m/%Y %H:%M")
 
     return render(request, 'library_playlist_details.html', {'playlist': playlist, 'songs': songs, 'subscription_end_date': formatted_date})
+
+@login_required
+def toggle_favourite(request, id):
+
+    subscription = Subscription.objects.get(pk=id)
+    subscription.is_favourite = not subscription.is_favourite
+    subscription.save()        
+    return redirect(request.META.get('HTTP_REFERER'))
