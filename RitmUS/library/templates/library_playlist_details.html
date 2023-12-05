@@ -10,7 +10,7 @@
        <div class="info-playlist">
         <div>
             <img src="{{ subscription.playlist.image.url }}" class="cover-image"  alt="imagen playlist">
-            <a href="/library/subscription/{{subscription.id}}/toggle_favourite/">
+            <a href="/library/subscription/toggle_favourite/{{subscription.id}}">
                 <button class="heart-toggle">
                     {% if subscription.is_favourite %}
                        <strong style="color: #ffffff ; font-size: 200%; justify-content: center;" >❤️</strong>

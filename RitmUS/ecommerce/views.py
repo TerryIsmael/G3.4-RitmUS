@@ -22,7 +22,6 @@ def playlist_search(request):
 def get_queryset(request):
         queryset = request.GET.get("search","")
         price_range = request.GET.get('price_range', '')
-        print(queryset)
         queryset2 = Playlist.objects.filter(name__icontains=queryset)
         queryset2 |= Playlist.objects.filter(genre__icontains=queryset)
         if price_range:

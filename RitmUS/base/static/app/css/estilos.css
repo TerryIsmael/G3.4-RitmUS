@@ -382,6 +382,7 @@ input.error {
     color: white;
     font-size: 16px;
     margin-left: 10px;
+    cursor: pointer;
 }
 
 .selector {
@@ -433,4 +434,27 @@ ul {
 
 .clean-a:hover{
     text-decoration: none;
+}
+
+.ibuscador-biblioteca {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    height: 33px;
+    border: 3px solid #671c1c;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.buscarbutton-biblioteca {
+    width: 100px;
+    height: 33px;
+    border-radius: 6px;
+    border: 3px solid #671c1c;
+    background-color: #671c1c;
+    color: white;
+    font-size: 16px;
+    margin-left: 20px;
+    margin-right: 10px;
+    cursor: pointer;
 }
