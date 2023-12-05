@@ -79,7 +79,6 @@ def list_incidences(request):
     data = {
         'incidences': incidences
     }
-    print (incidences[0].status)
     return render(request, 'incidences/listincidence.html', data)
 
 def playlist_detail(request, pk):
