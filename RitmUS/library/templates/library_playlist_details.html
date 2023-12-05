@@ -8,11 +8,22 @@
    <div class="detalle-playlist">
        
        <div class="info-playlist">
-            <img src="{{ playlist.image.url }}" class="cover-image"  alt="imagen playlist">
-           <h2>{{ playlist.name }}</h2>
-           <p>{{ playlist.genre }}</p>
-           <p>Descripción: {{playlist.description}}</p>
-           <p>La suscripción finaliza el: {{subscription_end_date}} </p>
+        <div>
+            <img src="{{ subscription.playlist.image.url }}" class="cover-image"  alt="imagen playlist">
+            <a href="/library/subscription/{{subscription.id}}/toggle_favourite/">
+                <button class="heart-toggle">
+                    {% if subscription.is_favourite %}
+                       <strong style="color: #ffffff ; font-size: 200%; justify-content: center;" >❤️</strong>
+                    {% else %}
+                        <strong style="color: #ffffff ; font-size: 200%; justify-content: center;">🤍</strong> 
+                    {% endif %}
+                </button>
+            </a>
+        </div>
+            <h2>{{ subscription.playlist.name }}</h2>
+            <p>{{ subscription.playlist.genre }}</p>
+            <p>Descripción: {{ subscription.playlist.description }}</p>
+            <p>La suscripción finaliza el: {{subscription_end_date}} </p>
 
            <h1>Canciones:</h1>
            <ul>

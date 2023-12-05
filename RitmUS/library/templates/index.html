@@ -7,21 +7,31 @@
 {% block content %}
     <h2>Tu biblioteca</h2>
     <div class="productos">
-        {% for p in playlists %}
-        
-        <div class="producto">
-            <a href="{% url 'library_playlist_detail' pk=p.pk %}" class="detalles">    
+        {% for s in subscriptions %}
+        <div class="producto">   
                 <div class="contenedor_producto">
-                
-                    <img src="{{ p.image.url }}" alt="imagen producto">
-                
-                    <div class="detalles">
-                        <h6>{{ p.genre }}</h6>
-                        <h2>{{ p.name }}</h2>
+                    <div class="image-container" id="imagen_biblioteca">
+                        <a href="{% url 'library_playlist_detail' pk=s.playlist.id %}">
+                        <img src="{{ s.playlist.image.url }}" alt="imagen producto">
+                        </a>
+                        <a href="subscription/{{s.id}}/toggle_favourite/" class="heart-link">
+                            <button class="heart-toggle" name="playlist_pk">
+                                {% if s.is_favourite %}
+                                    <strong style="color: #ffffff">❤️</strong>
+                                {% else %}
+                                    <strong style="color: #ffffff">🤍</strong> 
+                                {% endif %}
+                            </button>
+                        </a>
                     </div>
+                    <a href="{% url 'library_playlist_detail' pk=s.playlist.id %}" class="clean-a">
+                    <div class="detalles">
+                        <h6>{{ s.playlist.genre }}</h6>
+                        <h2>{{ s.playlist.name }}</h2>
+                    </div>
+                </a>
                 </div>
             </a>
-            
         </div>
         {% endfor %}
     </div>

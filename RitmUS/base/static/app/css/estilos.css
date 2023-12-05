@@ -349,6 +349,13 @@ input.error {
     padding: 8px; 
 }
 
+.info-playlist div {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
 .buscador {
     margin: 20px;
     padding: 10px;
@@ -386,6 +393,45 @@ input.error {
     margin-left: 10px;
 }
 
+/*PARA BIBLIOTECA*/
+
 ul {
     margin-bottom: 0px;
+}
+
+.image-container {
+    position: relative;
+}
+
+#imagen_biblioteca {
+    position: relative;
+    display: inline-block;
+    width: 100%; 
+    height: 100%; 
+}
+
+.heart-link {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px;
+}
+
+.heart-toggle {
+    background-color: rgba(0, 0, 0, 0);
+    border: 0px;
+    margin: 0px;
+    font-size: xx-large;
+    align-items: right;
+    transition: transform 0.3s ease-in-out;
+    outline: none;
+}
+
+.heart-toggle:hover {
+    transform: scale(1.5);
+    outline: none;
+}
+
+.clean-a:hover{
+    text-decoration: none;
 }
