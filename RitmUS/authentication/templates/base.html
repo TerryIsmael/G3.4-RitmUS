@@ -25,17 +25,20 @@
                     <a href="contacto.html">Contácto</a>
                 </li>
                 <li>
-                    <a href="galeria.html">Galería</a>
+                    <a href="/library">Biblioteca</a>
                 </li>
                 {% if user.is_authenticated %}
                 <li>
                     <a href="{% url 'logout' %}">Logout</a>
                 </li>
                 <li>
+                    <a href="{% url 'list_incidences' %}">Incidencias</a>
+                </li>
+                <li>
                     <a href="#">Bienvenido {{user.username}}</a>
                 {% else %}
                 <li>
-                    <a href="{% url 'login' %}">Login</a>
+                    <a href="{% url 'custom_login' %}">Login</a>
                 </li>
                 {% endif %}
             </ul>
@@ -62,6 +65,5 @@
         </div>
     </footer>
 </footer>
-<script src="{ % 'app/js/menu.js' % }"></script>
 </body>
 </html>
