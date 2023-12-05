@@ -65,6 +65,7 @@ class Subscription(models.Model):
     price = models.FloatField()
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     playlist = models.ForeignKey(Playlist, on_delete=models.CASCADE)
+    is_favourite = models.BooleanField(default=False)
     
 class Cart(models.Model):
     plan = models.IntegerField(default=1)
