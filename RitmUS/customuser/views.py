@@ -4,7 +4,6 @@ from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.contrib.auth.middleware import get_user
 from django.contrib.auth.decorators import login_required
 from base.models import Playlist, Song, User, Incidence
 

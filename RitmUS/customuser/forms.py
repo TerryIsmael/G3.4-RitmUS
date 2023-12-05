@@ -11,8 +11,6 @@ class CreateIncidenceForm(forms.ModelForm):
         fields = ['description']
 
     
-        
-
 class CustomUserLoginForm(AuthenticationForm):
     
 

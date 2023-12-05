@@ -4,7 +4,6 @@ from .views import home, register,custom_login, create_incidence, list_incidence
 
 
 urlpatterns = [
-    path('', home, name='home'),
     path('register/', register, name='register'),
     path('user/login/', custom_login, name='custom_login'),
     path('incidence/new/', create_incidence, name='create_incidence'),
