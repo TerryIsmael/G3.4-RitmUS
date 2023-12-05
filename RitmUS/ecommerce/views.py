@@ -21,8 +21,12 @@ def playlist_detail(request, pk):
         for rating in ratings:
             averageRating += rating.score
         averageRating /= ratings.count()
-    users=ratings.count()
-    data = {'playlist': playlist, 'songs': songs, 'averageRating': averageRating, 'users': users, 'ratings': ratings}
+        averageRating = round(averageRating, 2) 
+    stars=[0,1,2,3,4]
+    users = ratings.count()
+    print(users)
+    print(averageRating)
+    data = {'playlist': playlist, 'songs': songs, 'averageRating': averageRating, 'users': users, 'ratings': ratings, 'stars': stars}
 
     return render(request, 'playlist_details.html', data)
 
