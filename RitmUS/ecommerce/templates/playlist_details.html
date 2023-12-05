@@ -5,6 +5,8 @@
 {% block title %}Detalles de Playlist{% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-...">
+
    <div class="detalle-playlist">
        
        <div class="info-playlist">
@@ -12,16 +14,16 @@
            <h2>{{ playlist.name }}</h2>
            <p>{{ playlist.genre }} - {{ playlist.price }}€/mes</p>
            <p>Descripción: {{playlist.description}}</p>
-          
                 {% for i in stars %}
-                    {% if averageRating >= i %}
-                        <span class="star">&#9733;</span>
+                    {% if doubleRating >= i %}
+                    <i class="fas fa-star text-warning"></i>
+                    {% elif doubleRating >= i|add:"-1" %}
+                    <i class="fas fa-star-half-alt text-warning"></i>
                     {% else %}
-                        <span class="star">&#9734;</span>
+                    <i class="far fa-star text-muted"></i>
                     {% endif %}
                 {% endfor %}
                 <span class="star">| {{averageRating}} / Usuarios: {{ users }} </span>
-               
 
            <h1>Canciones:</h1>
            <ul>
