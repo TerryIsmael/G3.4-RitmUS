@@ -7,12 +7,13 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 offset-md-4">
-                <h2>Login</h2>
+                <h2>Iniciar sesión</h2>
                 <form action="{% url 'login' %}" method="post">
                     {% csrf_token %}
                     {{ form.as_p }}
-                    <button type="submit">Login</button>
+                    <button type="submit">Iniciar sesión</button>
                 </form>
+                <p>¿No tienes cuenta? <a href="{% url 'register' %}">Regístrate</a></p>
             </div>
         </div>
     </div>

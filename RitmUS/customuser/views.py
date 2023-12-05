@@ -5,10 +5,9 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from base.models import Playlist, Song, User, Incidence
+from base.models import  User, Incidence
 
-def home(request):
-    return render(request, 'home.html')
+
 
 
 
@@ -42,10 +41,12 @@ def register(request):
         form = CustomUserCreationForm(data=request.POST)
         if form.is_valid():
             form.save()
+            print(User.objects.filter(email=form.cleaned_data['email']).first())
             user = authenticate(
-                username=form.cleaned_data['username'],
+                username=form.cleaned_data['email'],
                 password=form.cleaned_data['password1']
             )
+            print(form.cleaned_data['email'], form.cleaned_data['password1'])
             login(request, user)
             messages.success(request, 'Registrado correctamente')
             return redirect(to='home')
@@ -79,26 +80,3 @@ def list_incidences(request):
         'incidences': incidences
     }
     return render(request, 'incidences/listincidence.html', data)
-
-def playlist_detail(request, pk):
-    playlist = Playlist.objects.get(pk=pk)
-    songs = Song.objects.filter(playlist=playlist)
-    datos = {'playlist': playlist, 'songs': songs}
-    return render(request, 'playlist_details.html', datos)
-
-def playlist_search(request):
-    query=get_queryset(request)
-    datos = {'playlists': query}
-    return render(request, 'home.html', datos)
-
-
-def get_queryset(request):
-        queryset = request.GET.get("search","")
-        price_range = request.GET.get('price_range', '')
-        print(queryset)
-        queryset2 = Playlist.objects.filter(name__icontains=queryset)
-        queryset2 |= Playlist.objects.filter(genre__icontains=queryset)
-        if price_range:
-            min_price, max_price = map(int, price_range.split('-'))
-            queryset2 &= Playlist.objects.filter(price__gte=min_price, price__lte=max_price)
-        return queryset2
