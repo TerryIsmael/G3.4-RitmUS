@@ -13,34 +13,35 @@
 <header id="header">
     <img class="menu" src="{% static 'app/img/menuiconwhite.png' %}" alt="menu"  id="menu">
     <div class="contenedor_logo">
-        <img class="logo" src="{% static 'app/img/LogoRitmus.png' %}" alt="logo" >
+        <a href = "/"><img class="logo" src="{% static 'app/img/LogoRitmus.png' %}" alt="logo"></a>
     </div>
     <div>
         <nav id="nav">
             <ul>
                 <li>
-                    <a href="index.html">Inicio</a>
-                </li>
-                <li>
-                    <a href="contacto.html">Contácto</a>
+                    <a href="/">Inicio</a>
                 </li>
                 <li>
                     <a href="/library">Biblioteca</a>
                 </li>
                 {% if user.is_authenticated %}
                 <li>
-                    <a href="{% url 'logout' %}">Logout</a>
-                </li>
-                <li>
                     <a href="{% url 'list_incidences' %}">Incidencias</a>
                 </li>
                 <li>
-                    <a href="#">Bienvenido {{user.username}}</a>
+                    Bienvenido {{user.username}}
+                </li>
+                <li>
+                    <a href="{% url 'logout' %}">Logout</a>
+                </li>
                 {% else %}
                 <li>
                     <a href="{% url 'custom_login' %}">Login</a>
                 </li>
                 {% endif %}
+
+                
+                
             </ul>
         </nav>
     </div>
