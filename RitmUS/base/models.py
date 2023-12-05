@@ -1,6 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+#from django.contrib.auth.models import User
 from enum import Enum
+
+User=get_user_model()
 
 class status(Enum):
     PENDING = 'Pendiente'
@@ -8,11 +11,12 @@ class status(Enum):
     RESOLVED = 'Resuelta'
 
 class Incidence(models.Model):
-    #status = models.CharField(max_length=50,choices=[state.value for state in status])
-    status = models.CharField(max_length=50, choices=[(state.name, state.value) for state in status])
+    status = models.CharField(max_length=50, choices=[(state.name, state.value) for state in status], default=status.PENDING.name)
     description = models.TextField(max_length=500)
     date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    
+    
   
 class Playlist(models.Model):
     name = models.CharField(max_length=50)
