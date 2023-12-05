@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .forms import CreateRatingForm
+from .forms import CreateRatingForm, EditRatingForm
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -16,6 +16,8 @@ def playlist_detail(request, pk):
     playlist = Playlist.objects.get(pk=pk)
     songs = Song.objects.filter(playlist=playlist)
     ratings = Rating.objects.filter(playlist=playlist)
+    user = request.user
+    ratingUser = Rating.objects.filter(playlist=playlist, user=user)
     averageRating = 0
     if ratings.count() > 0:
         for rating in ratings:
@@ -26,7 +28,8 @@ def playlist_detail(request, pk):
     users = ratings.count()
     print(users)
     print(averageRating)
-    data = {'playlist': playlist, 'songs': songs, 'averageRating': averageRating, "doubleRating": averageRating*2, 'users': users, 'ratings': ratings, 'stars': stars}
+    data = {'playlist': playlist, 'songs': songs, 'averageRating': averageRating, "doubleRating": averageRating*2,
+             'users': users, 'ratings': ratings, 'stars': stars, 'ratingUser': ratingUser}
 
     return render(request, 'playlist_details.html', data)
 
@@ -51,6 +54,37 @@ def create_rating(request, pk):
             data['form'] = form
 
     return render(request, 'ratings/createrating.html', data)
+
+@login_required
+def edit_rating(request, pk):
+    playlist = Playlist.objects.get(pk=pk)
+    rating = Rating.objects.get(playlist=playlist, user=request.user)
+    data = {
+        'playlist': playlist,
+        'form': EditRatingForm(initial={'user': request.user, 'playlist': playlist, 'score': rating.score, 'description': rating.description})
+    }
+    if request.method == 'POST':
+        form = EditRatingForm(data=request.POST)
+        if form.is_valid():
+            rating.delete()
+            rating = form.save(commit=False)
+            rating.user = request.user
+            rating.playlist = playlist
+            rating.save()
+            form.save()
+            messages.success(request, 'Reseña editada correctamente')
+            return redirect(to='playlist_detail', pk=pk)
+        else:
+            data['form'] = form
+
+    return render(request, 'ratings/editrating.html', data)
+
+def delete_rating(request, pk):
+    playlist = Playlist.objects.get(pk=pk)
+    rating = Rating.objects.get(playlist=playlist, user=request.user)
+    rating.delete()
+    messages.success(request, 'Reseña eliminada correctamente')
+    return redirect(to='playlist_detail', pk=pk)
 
 def playlist_search(request):
     query=get_queryset(request)

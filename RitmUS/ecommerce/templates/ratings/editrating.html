@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Comenta sobre la playlist{% endblock %}
+
+{% block content %}
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <h2>Comenta sobre la playlist</h2>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="hidden" name="user" value="{{ request.user }}">
+                    <input type="hidden" name="playlist" value="{{ playlist }}">
+                    <button type="reset">Limpiar formulario</button>
+                    <button type="submit">Publicar</button>
+                </form>
+            </div>
+        </div>
+
+
+{% endblock %}
