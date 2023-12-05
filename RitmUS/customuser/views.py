@@ -42,10 +42,12 @@ def register(request):
         form = CustomUserCreationForm(data=request.POST)
         if form.is_valid():
             form.save()
+            print(User.objects.filter(email=form.cleaned_data['email']).first())
             user = authenticate(
-                username=form.cleaned_data['username'],
+                username=form.cleaned_data['email'],
                 password=form.cleaned_data['password1']
             )
+            print(form.cleaned_data['email'], form.cleaned_data['password1'])
             login(request, user)
             messages.success(request, 'Registrado correctamente')
             return redirect(to='home')
