@@ -28,7 +28,7 @@ def library_playlist_detail(request, pk):
     correct_date = subscription.end_date + timedelta(hours=1)
     formatted_date = correct_date.strftime("%d/%m/%Y %H:%M")
 
-    return render(request, 'library_playlist_details.html', {'playlist': playlist, 'songs': songs, 'subscription_end_date': formatted_date})
+    return render(request, 'library_playlist_details.html', {'subscription': subscription, 'songs': songs, 'subscription_end_date': formatted_date})
 
 @login_required
 def toggle_favourite(request, id):

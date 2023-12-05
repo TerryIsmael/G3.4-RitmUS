@@ -5,8 +5,6 @@
 {% block title %}Biblioteca{% endblock %}
 
 {% block content %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-GLhlTQ8iN17Sme8N0+8bPJTj80j4zju+rnF5/6LZ8l5UAW0indFfX4CjFp5aFb4Q" crossorigin="anonymous">
-
     <h2>Tu biblioteca</h2>
     <div class="productos">
         {% for s in subscriptions %}
@@ -19,9 +17,9 @@
                         <a href="subscription/{{s.id}}/toggle_favourite/" class="heart-link">
                             <button class="heart-toggle" name="playlist_pk">
                                 {% if s.is_favourite %}
-                                    <strong>♥</strong>
+                                    <strong style="color: #ffffff">❤️</strong>
                                 {% else %}
-                                    <strong>♡</strong> 
+                                    <strong style="color: #ffffff">🤍</strong> 
                                 {% endif %}
                             </button>
                         </a>
