@@ -3,13 +3,25 @@ from .forms import CreateRatingForm, EditRatingForm
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from base.models import Playlist,User, Song, Rating
+from base.models import Playlist,User, Song, Rating,Cart
 from django.contrib import messages
 
 def home(request):
     playlists = Playlist.objects.all()
     data = {'playlists': playlists}
     return render(request, 'home.html', data)
+
+def add_to_cart(request, pk):
+    playlist = Playlist.objects.get(pk=pk)
+    user = request.user
+    cart = Cart.objects.filter(user=user).first() 
+    print(cart)
+    if not cart:
+        cart = Cart.objects.create(user=user)
+    cart.products.add(playlist)  
+    cart.save()
+    messages.success(request, 'Playlist añadida al carrito correctamente')
+    return redirect(to='playlist_detail', pk=pk)
 
 
 def playlist_detail(request, pk):

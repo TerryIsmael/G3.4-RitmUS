@@ -70,5 +70,5 @@ class Subscription(models.Model):
 class Cart(models.Model):
     plan = models.IntegerField(default=1)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    product = models.ForeignKey(Playlist, on_delete=models.CASCADE)
+    products = models.ManyToManyField(Playlist)
     
