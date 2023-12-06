@@ -22,8 +22,18 @@
                     {% endif %}
                 {% endfor %}
                 <span class="star">| {{averageRating}} / Usuarios: {{ users }} </span>
-            {% if user.is_authenticated %}    
-                <a href="{% url 'add_to_cart' pk=playlist.pk %}" class="btn btn-secondary">Añadir al carrito</a>
+            {% if user.is_authenticated %}
+                {% if cart %}
+                    <a href="{% url 'cart' %}" class="btn btn-secondary">Ir al carrito <i class="fa-solid fa-cart-shopping"></i></a>
+                {% else %}
+                    {% if hasSuscription %}
+                        <h3>Ya tienes una suscripción activa</h3>
+                        <a href="{% url 'library_playlist_detail' pk=playlist.pk %}" class="btn btn-secondary">Ir a biblioteca</a>
+                    {% else %}
+                        <a href="{% url 'add_to_cart' pk=playlist.pk %}" class="btn btn-secondary">Añadir al carrito</a>
+                    {% endif %}
+
+                {% endif %}    
             {% endif %}
 
            <h1>Canciones:</h1>
