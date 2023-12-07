@@ -6,6 +6,8 @@
 
 {% block content %}
 
+    
+    
     <form class="buscador" method="get" action="{% url 'playlist_search' %}">
         <input class="ibuscador" type="text" name="search" id="search">
 
@@ -18,10 +20,10 @@
             <option value="20-30">20€/mes - 30€/mes</option>
             <option value="30-1000">Más de 30€/mes</option>
         </select>
-
     </form>
 
-    <h2>Listas de Canciones</h2>
+    <h2 style="margin-left: 23px;">Tienda</h2>
+
     <div class="productos">
         {% if playlists %}
             {% for p in playlists %}

@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Detalles de Playlist{% endblock %}
+
+{% block content %}
+   <div class="detalle-playlist">
+       
+       <div class="info-playlist">
+            <img src="{{ playlist.image.url }}" class="cover-image"  alt="imagen playlist">
+           <h2>{{ playlist.name }}</h2>
+           <p>{{ playlist.genre }} - {{ playlist.price }}€/mes</p>
+           <p>Descripción: {{playlist.description}}</p>
+                {% for i in stars %}
+                    {% if doubleRating >= i %}
+                    <i class="fas fa-star text-warning"></i>
+                    {% elif doubleRating >= i|add:"-1" %}
+                    <i class="fas fa-star-half-alt text-warning"></i>
+                    {% else %}
+                    <i class="far fa-star text-muted"></i>
+                    {% endif %}
+                {% endfor %}
+                <span class="star">| {{averageRating}} / Usuarios: {{ users }} </span>
+            {% if user.is_authenticated %}
+                {% if cart %}
+                    <a href="{% url 'cart' %}" class="btn btn-secondary">Ir al carrito <i class="fa-solid fa-cart-shopping"></i></a>
+                {% else %}
+                    {% if hasSuscription %}
+                        <h3>Ya tienes una suscripción activa</h3>
+                        <a href="{% url 'library_playlist_detail' pk=playlist.pk %}" class="btn btn-secondary">Ir a biblioteca</a>
+                    {% else %}
+                        <a href="{% url 'add_to_cart' pk=playlist.pk %}" class="btn btn-secondary">Añadir al carrito</a>
+                    {% endif %}
+
+                {% endif %}    
+            {% endif %}
+
+           <h1>Canciones:</h1>
+           <ul>
+               {% for song in songs %}
+                   <li > <img src="{{ song.image.url }}" class="song-image"  alt="imagen cancion"> {{ song.title }} - {{ song.artist }} - {{ song.duration }}min </li>
+               {% endfor %}
+           </ul>
+           
+       </div>
+   </div>
+    {% if user.is_authenticated %}
+        {% if ratingUser %}
+            <a href="{% url 'edit_rating' pk=playlist.pk %}" class="btn btn-secondary">Editar comentario</a>
+            <a href="{% url 'delete_rating' pk=playlist.pk %}" class="btn btn-secondary">Eliminar comentario</a>
+        {% else %}
+            <a href="{% url 'create_rating' pk=playlist.pk %}" class="btn btn-secondary">Comentar</a>
+        {% endif %}
+    {% endif %}
+   {% if ratings %}
+   <table class="table table-striped table-hover">
+       <tr>
+           <th>Nota</th>
+           <th>Tu Comentario</th>
+       {% for rating in ratings %}
+            {% if rating.user == user %}
+            <tr>
+                    <td>{{ rating.score }}</td>
+                    <td>{{ rating.user.username}}</td>
+                    <td>{{ rating.description }}</td>
+                    <td>{{ rating.date }}</td>
+            </tr>
+            {% endif %}
+       {% endfor %}
+       </table>
+    
+       <table class="table table-striped table-hover">
+        <tr>
+            <th>Nota</th>
+            <th>Comentarios de otros usuarios</th>
+        {% for rating in ratings %}
+             {% if rating.user != user %}
+             <tr>
+                     <td>{{ rating.score }}</td>
+                     <td>{{ rating.user.username}}</td>
+                     <td>{{ rating.description }}</td>
+                     <td>{{ rating.date }}</td>
+             </tr>
+             {% endif %}
+        {% endfor %}
+        </table>
+       
+{% else %}
+       <p>No hay comentarios</p>
+{% endif %}
+
+{% endblock %}

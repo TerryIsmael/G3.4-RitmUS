@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Biblioteca{% endblock %}
+
+{% block content %}
+
+    <form class="buscador" method="get" action="{% url 'library_playlist_search' %}">
+        <input class="ibuscador-biblioteca" type="text" name="search" id="search">
+        <span style="padding: 10px;"> Favoritos: </span> 
+        <input type="checkbox" name="search_favourite" id="search">
+        <button class="buscarbutton-biblioteca" type="submit">Buscar</button>
+
+        {% if queryset and queryfav == "on" %}
+            <span>Buscando por "{{ queryset }} y Favoritos"<a href='http://127.0.0.1:8000/library/playlist/search/' ></span><strong style="color:red">✖</strong></a>
+        {% elif queryset %}
+            <span>Buscando por "{{ queryset }}"<a href='http://127.0.0.1:8000/library/playlist/search/' ></span><strong style="color:red">✖</strong></a>
+        {% elif queryfav == "on" %}
+            <span>Buscando por Favoritos"<a href='http://127.0.0.1:8000/library/playlist/search/' ></span><strong style="color:red">✖</strong></a>
+        {% endif %}     
+    </form>
+
+    <h2>Tu biblioteca</h2>
+    <div class="productos">
+        {% for s in subscriptions %}
+        <div class="producto">   
+                <div class="contenedor_producto">
+                    <div class="image-container" id="imagen_biblioteca">
+                        <a href="{% url 'library_playlist_detail' pk=s.playlist.id %}">
+                        <img src="{{ s.playlist.image.url }}" alt="imagen producto">
+                        </a>
+
+                        <a href="/library/subscription/toggle_favourite/{{s.id}}" class="heart-link">
+                            <button class="heart-toggle" name="playlist_pk">
+                                {% if s.is_favourite %}
+                                    <strong style="color: #ffffff">❤️</strong>
+                                {% else %}
+                                    <strong style="color: #ffffff">🤍</strong> 
+                                {% endif %}
+                            </button>
+                        </a>
+                    </div>
+                    <a href="{% url 'library_playlist_detail' pk=s.playlist.id %}" class="clean-a">
+                    <div class="detalles">
+                        <h6>{{ s.playlist.genre }}</h6>
+                        <h2>{{ s.playlist.name }}</h2>
+                    </div>
+                </a>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

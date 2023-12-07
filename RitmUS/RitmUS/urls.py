@@ -22,8 +22,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('authentication.urls')),
+    path('', include('customuser.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('library/', include('library.urls')),
+    path('', include('ecommerce.urls')),
 ]
 
 if settings.DEBUG:
