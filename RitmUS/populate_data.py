@@ -11,7 +11,7 @@ def populate():
         {'name': 'Metálico', 'description': 'Los éxitos del metal', 'price': 10, 'image': 'static/img/GenerosRock.png', 'genre': 'Rock', 'is_active': True},
         {'name': 'Like BlackPink', 'description': 'Los éxitos del KPOP más recientes', 'price': 20, 'image': 'static/img/GenerosKPOP.png', 'genre': 'KPOP', 'is_active': True},
         {'name': 'DellaBanco', 'description': 'Los éxitos de DellaBanco', 'price': 15, 'image': 'static/img/GenerosTrap.png', 'genre': 'Trap', 'is_active': True},
-        {'name': 'MerengeLatino', 'description': 'Los éxitos del merengue latino', 'price': 12, 'image': 'static/img/Merengue.png', 'genre': 'Merengue', 'is_active': True},
+        {'name': 'MerengueLatino', 'description': 'Los éxitos del merengue latino', 'price': 12, 'image': 'static/img/Merengue.png', 'genre': 'Merengue', 'is_active': True},
         
         # Agrega más datos según sea necesario
     ]
