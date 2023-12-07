@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tecnomarket</title>
+    <title>RitmUS</title>
     {% load static %}
+    <link rel="icon" href="{% static 'app/img/LogoRitmus.png' %}" type="image/png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'app/css/estilos.css' %}">
 </head>
@@ -29,14 +30,17 @@
                     <a href="{% url 'list_incidences' %}">Incidencias</a>
                 </li>
                 <li>
-                    Bienvenido {{user.username}}
-                </li>
-                <li>
-                    <a href="{% url 'logout' %}">Logout</a>
+                    <div class="dropdown">
+                        <span>Bienvenido {{user.username}}</span>
+                        <div class="dropdown-content">
+                            <a href="{% url 'change_user' %}">Editar perfil</a>
+                            <a href="{% url 'logout' %}">Cerrar sesión</a>
+                        </div>
+                      </div>
                 </li>
                 {% else %}
                 <li>
-                    <a href="{% url 'custom_login' %}">Login</a>
+                    <a href="{% url 'custom_login' %}">Iniciar sesión</a>
                 </li>
                 {% endif %}
 
@@ -68,3 +72,23 @@
 </footer>
 </body>
 </html>
+<script>
+function toggleDropdown() {
+    var dropdown = document.getElementById("myDropdown");
+    dropdown.classList.toggle("show");
+}
+
+
+window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+};
+</script>
