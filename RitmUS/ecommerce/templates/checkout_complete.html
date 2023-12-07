@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Pago{% endblock %}
+
+{% block content %}
+<h2>¡Tu suscripción ha sido completada!</h2>
+<li>
+    <a href="{% url 'index' %}" class="btn btn-secondary">Ir a Biblioteca</a>
+    <a href="{% url 'home' %}" class="btn btn-secondary">Ir a Tienda</a>
+</li>
+{% endblock %}
