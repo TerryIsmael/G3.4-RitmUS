@@ -3,7 +3,7 @@ from .forms import CreateRatingForm, EditRatingForm
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from base.models import Playlist,User, Song, Rating
+from base.models import Playlist,User, Song, Rating,Cart,Order,Subscription
 from django.contrib import messages
 
 def home(request):
@@ -11,6 +11,50 @@ def home(request):
     data = {'playlists': playlists}
     return render(request, 'home.html', data)
 
+@login_required
+def add_to_cart(request, pk):
+    playlist = Playlist.objects.get(pk=pk)
+    user = request.user
+    cart = Cart.objects.filter(user=user).first() 
+    if not cart:
+        cart = Cart.objects.create(user=user)
+    cart.products.add(playlist)  
+    cart.save()
+    messages.success(request, 'Playlist añadida al carrito correctamente')
+    return redirect(to='playlist_detail', pk=pk)
+
+@login_required
+def cart(request):
+    user = request.user
+    cart = Cart.objects.filter(user=user).first()
+    playlists = list(cart.products.all())
+    print(playlists)
+    total = 0
+    if playlists:
+        for playlist in playlists:
+            total += playlist.price
+    print(total)
+    data = {'playlists': playlists, 'total': total}
+    return render(request, 'cart.html', data)
+
+@login_required
+def remove_from_cart(request, pk):
+    playlist = Playlist.objects.get(pk=pk)
+    user = request.user
+    cart = Cart.objects.filter(user=user).first()
+    cart.products.remove(playlist)
+    cart.save()
+    messages.success(request, 'Playlist eliminada del carrito correctamente')
+    return redirect(to='cart')
+
+@login_required
+def empty_cart(request):
+    user = request.user
+    cart = Cart.objects.filter(user=user).first()
+    cart.products.clear()
+    cart.save()
+    messages.success(request, 'Carrito vaciado correctamente')
+    return redirect(to='cart')
 
 def playlist_detail(request, pk):
     playlist = Playlist.objects.get(pk=pk)
@@ -26,10 +70,22 @@ def playlist_detail(request, pk):
         averageRating = round(averageRating, 2) 
     stars=[2,4,6,8,10]
     users = ratings.count()
-    print(users)
-    print(averageRating)
+    suscription = False
+    inCart = False
+    if user.is_authenticated:
+        cart = Cart.objects.filter(user=user).first()
+        if cart:
+            if playlist in cart.products.all():
+                inCart = True
+        order = Order.objects.filter(user=user)
+        for o in order:
+            sus = Subscription.objects.filter(playlist=playlist, order=o)
+            if sus:
+                suscription = True
+                break
     data = {'playlist': playlist, 'songs': songs, 'averageRating': averageRating, "doubleRating": averageRating*2,
-             'users': users, 'ratings': ratings, 'stars': stars, 'ratingUser': ratingUser}
+             'users': users, 'ratings': ratings, 'stars': stars, 'ratingUser': ratingUser, 
+             "hasSuscription": suscription, "cart": inCart}
 
     return render(request, 'playlist_details.html', data)
 

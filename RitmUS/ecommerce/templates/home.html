@@ -6,6 +6,8 @@
 
 {% block content %}
 
+    <h2 style="margin-left: 23px;">Tienda</h2>
+    
     <form class="buscador" method="get" action="{% url 'playlist_search' %}">
         <input class="ibuscador" type="text" name="search" id="search">
 
@@ -20,8 +22,6 @@
         </select>
 
     </form>
-
-    <h2>Listas de Canciones</h2>
     <div class="productos">
         {% if playlists %}
             {% for p in playlists %}
