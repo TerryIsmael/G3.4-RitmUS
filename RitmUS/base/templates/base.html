@@ -29,23 +29,28 @@
                     <a href="/library">Biblioteca</a>
                 </li>
                 {% if user.is_authenticated %}
-                <li>
-                    <a href="{% url 'list_incidences' %}">Incidencias</a>
-                </li>
-                <li>
-                    Bienvenido {{user.username}}
-                </li>
-                <li>
-                    <a href="{% url 'logout' %}">Logout</a>
-                </li>
-                {% else %}
-                <li>
-                    <a href="{% url 'custom_login' %}">Login</a>
-                </li>
-                {% endif %}
 
-                
-                
+                        {% if user.is_superuser %}
+                        <li>
+                            <a href="{% url 'all_sales' %}">Ventas</a>
+                        </li>
+                        {% endif %}
+
+                    <li>
+                        <a href="{% url 'list_incidences' %}">Incidencias</a>
+                    </li>
+                    <li>
+                        Bienvenido {{user.username}}
+                    </li>
+                    <li>
+                        <a href="{% url 'logout' %}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a href="{% url 'custom_login' %}">Login</a>
+                    </li>
+                {% endif %}
+       
             </ul>
         </nav>
     </div>

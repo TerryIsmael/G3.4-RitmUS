@@ -11,7 +11,7 @@
         {% for order, total_amount, subscriptions in subs_sale %}
             <div class="venta">
                 <div class="contenedor_venta">
-                    <button class="sale_button" onclick="toggleSuscripciones(this)"> Id de venta: {{ order.id }} - Precio: {{total_amount}}€ - Por usuario: {{ order.user }}</button>                    
+                    <button class="sale_button" onclick="toggleSuscripciones(this)"> Id de venta: {{ order.id }} - Precio: {{total_amount}}€ - Usuario: {{ order.user }}</button>                    
                     <div style="display: none;">
                         <ul>
                             {% for subscription in subscriptions %}
