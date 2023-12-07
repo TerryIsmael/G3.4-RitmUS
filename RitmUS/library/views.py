@@ -37,3 +37,34 @@ def toggle_favourite(request, id):
     subscription.is_favourite = not subscription.is_favourite
     subscription.save()        
     return redirect(request.META.get('HTTP_REFERER'))
+
+@login_required
+def library_playlist_search(request):
+
+    query=get_queryset(request)
+    queryset = request.GET.get("search","")
+    queryfav = request.GET.get("search_favourite","")
+
+    return render(request, 'index.html', {'subscriptions': query, 'queryset': queryset, 'queryfav': queryfav})
+
+@login_required
+def get_queryset(request):
+
+    orders = Order.objects.filter(user=request.user.id)
+    active_subs = []
+    
+    for order in orders:
+        subscriptions = Subscription.objects.filter(order=order)
+        active_subs = active_subs + [subscription for subscription in subscriptions if subscription.end_date > datetime.now(timezone.utc)]
+
+    queryset = request.GET.get("search","")
+    queryfav = request.GET.get("search_favourite","")
+    queryset2 = Playlist.objects.filter(name__icontains=queryset)
+    queryset2 |= Playlist.objects.filter(genre__icontains=queryset)
+
+    if queryfav == "on":
+        res = [subscription for subscription in active_subs if subscription.playlist in queryset2 and subscription.is_favourite]
+    else:
+        res = [subscription for subscription in active_subs if subscription.playlist in queryset2]
+    
+    return res
