@@ -16,8 +16,6 @@ class Incidence(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     
-    
-  
 class Playlist(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
