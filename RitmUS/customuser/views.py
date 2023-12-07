@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from .forms import CustomUserCreationForm, CustomUserLoginForm, CreateIncidenceForm
+from .forms import CustomUserCreationForm, CustomUserLoginForm, CreateIncidenceForm, CustomUserChangeForm, CustomUserChangePasswordForm, SetPasswordForm
 from django.shortcuts import redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -20,7 +20,6 @@ def custom_login(request):
         if form.is_valid():
             form.save()
             userAux = User.objects.filter(email=form.cleaned_data['email']).first()
-            print(userAux)
             user = authenticate(
                 username= userAux.username,
                 password=form.cleaned_data['password']
@@ -53,6 +52,41 @@ def register(request):
         else:
             data['form'] = form
     return render(request, 'registration/register.html', data)
+
+@login_required
+def change_user(request):
+    user = request.user
+    data = {
+        'form': CustomUserChangeForm(initial={
+            'username': user.username,
+            'email': user.email,
+            'first_name': user.first_name,
+            'last_name': user.last_name
+        })
+    }
+
+    if request.method == 'POST':
+        form = CustomUserChangeForm(data=request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Usuario modificado correctamente')
+            return redirect(to='home')
+        else:
+            data['form'] = form
+
+    return render(request, 'registration/change_user.html', data)
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form = SetPasswordForm(user=request.user, data=request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Contraseña modificada correctamente')
+            return redirect('home')
+    else:
+        form = SetPasswordForm(user=request.user)
+
+    return render(request, 'registration/change_password.html', {'form': form})
 
 @login_required
 def create_incidence(request):
