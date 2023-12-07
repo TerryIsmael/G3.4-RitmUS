@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth import get_user_model
 #from django.contrib.auth.models import User
 from enum import Enum
+import datetime
+from datetime import timedelta
 
 User=get_user_model()
 
@@ -16,8 +18,6 @@ class Incidence(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     
-    
-  
 class Playlist(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
@@ -60,8 +60,8 @@ class Order(models.Model):
         return total
 
 class Subscription(models.Model):
-    init_date = models.DateTimeField()
-    end_date = models.DateTimeField()
+    init_date = models.DateTimeField(auto_now_add=True)
+    end_date = models.DateTimeField(default = datetime.datetime.now() + timedelta(days=30))
     price = models.FloatField()
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     playlist = models.ForeignKey(Playlist, on_delete=models.CASCADE)
@@ -70,5 +70,5 @@ class Subscription(models.Model):
 class Cart(models.Model):
     plan = models.IntegerField(default=1)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    product = models.ForeignKey(Playlist, on_delete=models.CASCADE)
+    products = models.ManyToManyField(Playlist)
     

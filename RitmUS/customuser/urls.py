@@ -1,7 +1,5 @@
 from django.urls import path
-from .views import home, register,custom_login, create_incidence, list_incidences,change_user,change_password
-
-
+from .views import register,custom_login, create_incidence, list_incidences,change_user,change_password
 
 urlpatterns = [
     path('register/', register, name='register'),

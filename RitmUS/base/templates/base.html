@@ -9,6 +9,7 @@
     <link rel="icon" href="{% static 'app/img/LogoRitmus.png' %}" type="image/png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'app/css/estilos.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-...">
 </head>
 <body>
 <header id="header">
@@ -20,7 +21,10 @@
         <nav id="nav">
             <ul>
                 <li>
-                    <a href="/">Inicio</a>
+                    <a href="{% url 'cart' %}"><i class="fa-solid fa-cart-shopping"></i></a>
+                </li>
+                <li>
+                    <a href="/">Tienda</a>
                 </li>
                 <li>
                     <a href="/library">Biblioteca</a>
@@ -43,52 +47,25 @@
                     <a href="{% url 'custom_login' %}">Iniciar sesión</a>
                 </li>
                 {% endif %}
-
-                
-                
             </ul>
         </nav>
     </div>
 </header>
 <div id="contenido">
-
     {% block content %}
     {% endblock %}
-
 </div>
 <footer>
-    <footer>
-        <div class="marcas">
-            <img src="{% static 'app/img/footer/apple.png' %}" alt="apple" style="width: 30px;">
-            <img src="{% static 'app/img/footer/lenovo.png' %}" alt="lenovo">
-            <img src="{% static 'app/img/footer/microsoft.png' %}" alt="microsoft">
-            <img src="{% static 'app/img/footer/samsung.png' %}" alt="samsung">
-            <img src="{% static 'app/img/footer/xiaomi.png' %}" alt="xiaomi">
-        </div>
-        <div class="logo_footer">
-            <img src="{% static 'app/img/LogoRitmus.png' %}" alt="logo">
-        </div>
-    </footer>
+    <div class="marcas">
+        <span>RitmUs Corporation</span>
+        <span>666 66 66 66</span>
+        <span>ritmus@gmail.com</span>
+        <span>C/Lorem Ipsum 43</span>
+    </div>
+    <div class="logo_footer">
+        <img src="{% static 'app/img/LogoRitmus.png' %}" alt="logo">
+    </div>
 </footer>
 </body>
 </html>
-<script>
-function toggleDropdown() {
-    var dropdown = document.getElementById("myDropdown");
-    dropdown.classList.toggle("show");
-}
 
-
-window.onclick = function(event) {
-    if (!event.target.matches('.dropbtn')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-        }
-    }
-};
-</script>

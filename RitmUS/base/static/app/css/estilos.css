@@ -53,6 +53,7 @@ input[type=text], input[type=email], select, textarea {
 
 .button.secondary {
     background-color: #4A5568;
+    
 }
 
 
@@ -158,6 +159,8 @@ footer .marcas {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    
+    
 }
 
 footer .marcas img {
@@ -348,6 +351,13 @@ input.error {
     padding: 8px; 
 }
 
+.info-playlist div {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
 .buscador {
     margin: 20px;
     padding: 10px;
@@ -375,6 +385,7 @@ input.error {
     color: white;
     font-size: 16px;
     margin-left: 10px;
+    cursor: pointer;
 }
 
 .selector {
@@ -440,8 +451,6 @@ ul {
     display: block;
 }
 
-
-  
 .dropdown-content {
     display: none;
     position: absolute;
@@ -464,3 +473,25 @@ ul {
     margin-left: 10px;
 }
 
+.ibuscador-biblioteca {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    height: 33px;
+    border: 3px solid #671c1c;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.buscarbutton-biblioteca {
+    width: 100px;
+    height: 33px;
+    border-radius: 6px;
+    border: 3px solid #671c1c;
+    background-color: #671c1c;
+    color: white;
+    font-size: 16px;
+    margin-left: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+}
