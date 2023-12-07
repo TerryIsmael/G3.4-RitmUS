@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Ventas{% endblock %}
+
+{% block content %}
+
+    <h2 style="display: block">Ventas</h2> 
+    <div class="ventas">  
+        {% for order, total_amount, subscriptions in subs_sale %}
+            <div class="venta">
+                <div class="contenedor_venta">
+                    <button class="sale_button" onclick="toggleSuscripciones(this)"> Id de venta: {{ order.id }} - Precio: {{total_amount}}€ - Por usuario: {{ order.user }}</button>                    
+                    <div style="display: none;">
+                        <ul>
+                            {% for subscription in subscriptions %}
+                                </ul>
+                                    <a href="{% url 'playlist_detail' pk=subscription.playlist.id %}" class="detalles"> 
+                                        <h5>Playlist: {{ subscription.playlist.name }}</h5>
+                                    </a>
+                                    <li>Fecha inicio: {{ subscription.init_date }}</li>
+                                    <li>Fecha fin: {{ subscription.end_date }}</li>
+                                    <li>Precio: {{ subscription.price }}€</li>
+                                </ul>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        function toggleSuscripciones(enlace) {
+            var suscripciones = enlace.nextElementSibling;
+            if (suscripciones.style.display === "block") {
+                suscripciones.style.display = "none";
+            } else {
+                suscripciones.style.display = "block";
+            }
+        }
+    </script>
+
+{% endblock %}

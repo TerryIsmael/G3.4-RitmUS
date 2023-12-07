@@ -147,7 +147,6 @@ def playlist_search(request):
     data = {'playlists': query}
     return render(request, 'home.html', data)
 
-
 def get_queryset(request):
         queryset = request.GET.get("search","")
         price_range = request.GET.get('price_range', '')
@@ -158,7 +157,12 @@ def get_queryset(request):
             queryset2 &= Playlist.objects.filter(price__gte=min_price, price__lte=max_price)
         return queryset2
 
+@login_required
+def get_all_sales(request):
 
-
-
-
+    if not request.user.is_superuser:
+        return redirect(to='home')
+    else: 
+        orders = Order.objects.all()
+        susbs_sale = [(order, order.total_amount(), Subscription.objects.filter(order=order)) for order in orders]            
+        return render(request, 'sales.html', {'subs_sale': susbs_sale})

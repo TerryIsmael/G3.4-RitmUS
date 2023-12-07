@@ -53,7 +53,7 @@ class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     def total_amount(self):
         total = 0
-        for subscription in Subscription.objects.filter(order=self.id).all:
+        for subscription in Subscription.objects.filter(order=self.id).all():
             total += subscription.price
         return total
 
