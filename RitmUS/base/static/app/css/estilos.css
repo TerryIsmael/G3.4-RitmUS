@@ -496,13 +496,73 @@ ul {
     cursor: pointer;
 }
 
-.generic-button {
-    border-radius: 6px;
+/*PARA ORDERS*/
+
+.ventas {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.venta {
+    width: 80%;
+    align-self: center;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.contenedor_venta {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.sale_button {
+    width: 100%;
+    height: 40px;
+    border: none;
+    background-color: #7d2d2d;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    border-radius: 7px;
+}
+
+.ibuscador-ventas {
+    width: 60%;
     padding: 10px;
+    border-radius: 6px;
+    height: 33px;
+    border: 3px solid #671c1c;
+    font-size: 16px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.buscarbutton-ventas {
+    width: 110px;
+    height: 33px;
+    border-radius: 6px;
+    border: 3px solid #671c1c;
     background-color: #671c1c;
     color: white;
     font-size: 16px;
     margin-left: 20px;
     margin-right: 10px;
     cursor: pointer;
+}
+
+.contenedor_buscadores_ventas {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    width: 100%;
+}
+
+.generic-button {
+    border-radius: 6px;
+    padding: 10px;
 }
