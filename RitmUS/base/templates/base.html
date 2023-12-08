@@ -30,22 +30,33 @@
                     <a href="/library">Biblioteca</a>
                 </li>
                 {% if user.is_authenticated %}
-                <li>
-                    <a href="{% url 'list_incidences' %}">Incidencias</a>
-                </li>
-                <li>
-                    <div class="dropdown">
-                        <span>Bienvenido {{user.username}}</span>
-                        <div class="dropdown-content">
-                            <a href="{% url 'change_user' %}">Editar perfil</a>
-                            <a href="{% url 'logout' %}">Cerrar sesión</a>
+
+                    {% if user.is_superuser %}
+                        <li>
+                            <a href="{% url 'all_sales' %}">Ventas</a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{% url 'all_sales' %}">Mis compras</a>
+                        </li>
+                    {% endif %}
+
+                    <li>
+                        <a href="{% url 'list_incidences' %}">Incidencias</a>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            <span>Bienvenido {{user.username}}</span>
+                            <div class="dropdown-content">
+                                <a href="{% url 'change_user' %}">Editar perfil</a>
+                                <a href="{% url 'logout' %}">Cerrar sesión</a>
+                            </div>
                         </div>
-                      </div>
-                </li>
+                    </li>
                 {% else %}
-                <li>
-                    <a href="{% url 'custom_login' %}">Iniciar sesión</a>
-                </li>
+                    <li>
+                        <a href="{% url 'custom_login' %}">Iniciar sesión</a>
+                    </li>
                 {% endif %}
             </ul>
         </nav>
@@ -68,4 +79,3 @@
 </footer>
 </body>
 </html>
-
