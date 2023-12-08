@@ -201,8 +201,8 @@ def get_all_sales(request):
         subs_sale = [(order, order.total_amount(), Subscription.objects.filter(order=order, order__user=request.user)) for order in orders]
         subs_sale = [x for x in subs_sale if x[2].count() > 0]            
     else:         
-        subs_sale = [(order, order.total_amount(), Subscription.objects.filter(order=order)) for order in orders]            
-    
+        subs_sale = [(order, order.total_amount(), Subscription.objects.filter(order=order)) for order in orders]   
+
     return render(request, 'sales.html', {'subs_sale': subs_sale, 'admin': request.user.is_superuser})
     
 @login_required
