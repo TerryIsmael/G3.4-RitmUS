@@ -4,7 +4,6 @@ from django.contrib.auth import get_user_model
 from enum import Enum
 import datetime
 from datetime import timedelta
-import stripe 
 
 User=get_user_model()
 
@@ -51,24 +50,12 @@ class Song(models.Model):
     def __str__(self):
         return self.title + " - " + self.artist
 
-class Customer(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    customer_id = models.CharField(max_length=50)
-    def createCustomer(self, user):
-        customer = stripe.Customer.create(
-            description=user.email,
-        )
-        self.customer_id = customer.id
-        self.save()
-    
 class Order(models.Model):
     purchase_date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    
     def total_amount(self):
         total = 0
-        for subscription in Subscription.objects.filter(order=self.id).all():
+        for subscription in Subscription.objects.filter(order=self.id).all:
             total += subscription.price
         return total
 

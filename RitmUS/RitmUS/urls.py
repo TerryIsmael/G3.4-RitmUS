@@ -26,7 +26,6 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('library/', include('library.urls')),
     path('', include('ecommerce.urls')),
-    path("stripe/", include("djstripe.urls", namespace="djstripe")),
 ]
 
 if settings.DEBUG:
