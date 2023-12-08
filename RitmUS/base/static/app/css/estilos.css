@@ -495,3 +495,14 @@ ul {
     margin-right: 10px;
     cursor: pointer;
 }
+
+.generic-button {
+    border-radius: 6px;
+    padding: 10px;
+    background-color: #671c1c;
+    color: white;
+    font-size: 16px;
+    margin-left: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+}

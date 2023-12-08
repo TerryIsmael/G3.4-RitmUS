@@ -140,3 +140,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'customuser.CustomUser'
 AUTHENTICATION_BACKENDS = ['customuser.backends.CustomUserBackend']
+
+import os
+from dotenv import load_dotenv
+load_dotenv()
+STRIPE_API_KEY = os.environ.get("STRIPE_API_KEY")
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
+ 

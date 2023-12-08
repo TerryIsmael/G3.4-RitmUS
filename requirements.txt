@@ -5,6 +5,6 @@ django-filter==22.1
 requests==2.28.1
 django-rest-swagger==2.2.0
 Pillow
-
+stripe==2.60.0
 
 

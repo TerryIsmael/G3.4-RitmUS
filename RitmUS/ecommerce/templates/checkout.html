@@ -1,3 +1,8 @@
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  var stripe = Stripe(stripe_key);
+</script>
+
 {% extends "base.html" %}
 
 {% load static %}
@@ -25,8 +30,22 @@
         <tr>
             <td></td>
             <td>Total: {{ total }}€</td>
-            <td><a href="{% url 'checkout_complete' %}" class="btn btn-secondary">Pagar</a></td>
-            <td><a href="{% url 'empty_cart' %}" class="btn btn-secondary">Cancelar pedido</a></td>
+            <td>
+                <form action="{% url 'checkout' %}" method="post">
+                    {% csrf_token %}
+                    <script
+                        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                        data-key= {{stripe_key}}
+                        data-amount= {{stripe_total}}
+                        data-name="RitmUS"
+                        data-description="Finalizar compra"
+                        data-image="https://i.imgur.com/ntlUdK0.png"
+                        data-locale="auto"
+                        data-currency="eur">
+                    </script>
+              </form>
+            </td>
+            <td><a href="{% url 'cart' %}" class="btn btn-secondary">Cancelar pedido</a></td>
         </tr>
     </table>
 {% else %}
