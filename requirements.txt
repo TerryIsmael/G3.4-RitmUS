@@ -4,7 +4,7 @@ django-cors-headers==3.13.0
 django-filter==22.1
 requests==2.28.1
 django-rest-swagger==2.2.0
-Pillow
+Pillow==10.1.0
 stripe==2.60.0
 
 
