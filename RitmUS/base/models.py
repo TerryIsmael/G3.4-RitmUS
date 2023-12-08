@@ -15,7 +15,7 @@ class status(Enum):
 class Incidence(models.Model):
     status = models.CharField(max_length=50, choices=[(state.name, state.value) for state in status], default=status.PENDING.name)
     description = models.TextField(max_length=500)
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.DateTimeField(default = datetime.datetime.now())
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     
 class Playlist(models.Model):
@@ -32,7 +32,7 @@ class Playlist(models.Model):
 class Rating(models.Model):
     score = models.FloatField(max_length=5)
     description = models.TextField(max_length=500)
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.DateTimeField(default = datetime.datetime.now())
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     playlist=models.ForeignKey(Playlist, on_delete=models.CASCADE)
 
@@ -43,7 +43,7 @@ class Song(models.Model):
     album = models.CharField(max_length=50)
     duration = models.IntegerField()
     image = models.ImageField(upload_to='static/img/')
-    release_date = models.DateTimeField(auto_now_add=True)
+    release_date = models.DateTimeField(default = datetime.datetime.now())
     file_url = models.CharField(max_length=200)
     playlist = models.ForeignKey(Playlist, on_delete=models.CASCADE)
 
@@ -51,7 +51,7 @@ class Song(models.Model):
         return self.title + " - " + self.artist
 
 class Order(models.Model):
-    purchase_date = models.DateTimeField(auto_now_add=True)
+    purchase_date = models.DateTimeField(default = datetime.datetime.now())
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     def total_amount(self):
         total = 0
@@ -60,7 +60,7 @@ class Order(models.Model):
         return total
 
 class Subscription(models.Model):
-    init_date = models.DateTimeField(auto_now_add=True)
+    init_date = models.DateTimeField(default = datetime.datetime.now())
     end_date = models.DateTimeField(default = datetime.datetime.now() + timedelta(days=30))
     price = models.FloatField()
     order = models.ForeignKey(Order, on_delete=models.CASCADE)

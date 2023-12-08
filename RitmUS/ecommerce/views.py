@@ -198,7 +198,8 @@ def get_all_sales(request):
     subs_sale = []
 
     if not request.user.is_superuser:
-        subs_sale = [(order, order.total_amount(), Subscription.objects.filter(order=order, order__user=request.user)) for order in orders]            
+        subs_sale = [(order, order.total_amount(), Subscription.objects.filter(order=order, order__user=request.user)) for order in orders]
+        subs_sale = [x for x in subs_sale if x[2].count() > 0]            
     else:         
         subs_sale = [(order, order.total_amount(), Subscription.objects.filter(order=order)) for order in orders]            
     
@@ -206,34 +207,38 @@ def get_all_sales(request):
     
 @login_required
 def sales_search(request):
- 
+    
     query = get_sales_queryset(request)
     return render(request, 'sales.html', {'subs_sale': query, 'admin': request.user.is_superuser})
 
 @login_required
 def get_sales_queryset(request):
 
-    orders = Order.objects.all()
+    orders = []
     res = Q()
 
     queryset = request.GET.get("search","")
     start_date = request.GET.get("start_date","")
     end_date = request.GET.get("end_date","")
 
-    if request.user.is_superuser and queryset != "":
-        orders = Order.objects.filter(user__username__icontains=queryset)
+    if request.user.is_superuser: 
+        if queryset != "":
+            orders = Order.objects.filter(user__username__icontains=queryset)
+        else:
+            orders = Order.objects.all()
+    else:
+        orders = Order.objects.filter(user=request.user)
 
     if start_date != "":
         start_date = start_date + " 00:00:00"
-        formatted_start_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S") # Esto no funciona
-        res |= Q(init_date__gte=formatted_start_date)
+        formatted_start_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S") 
+        res &= Q(purchase_date__gte=formatted_start_date)
 
     if end_date != "":
         end_date = end_date + " 23:59:59"
-        formatted_end_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
-        res |= Q(init_date__lte=formatted_end_date)
+        formatted_end_date = datetime.strptime(end_date, "%Y-%m-%d %H:%M:%S")
+        res &= Q(purchase_date__lte=formatted_end_date)
 
-    result_set = [(order, order.total_amount(), Subscription.objects.filter(res).filter(order=order)) for order in orders]
-    result_set = [x for x in result_set if x[2].count() > 0]
+    result_set = [(order, order.total_amount(), Subscription.objects.filter(order=order)) for order in orders.filter(res)]
 
     return result_set

@@ -7,7 +7,7 @@
 {% block content %}
 
     <form class="buscador" method="get" action="{% url 'library_playlist_search' %}">
-        <input class="ibuscador-biblioteca" type="text" name="search" id="search">
+        <input class="ibuscador-biblioteca" type="text" name="search" id="search" placeholder="Introduzca título o género...">
         <span style="padding: 10px;"> Favoritos: </span> 
         <input type="checkbox" name="search_favourite" id="search">
         <button class="buscarbutton-biblioteca" type="submit">Buscar</button>
