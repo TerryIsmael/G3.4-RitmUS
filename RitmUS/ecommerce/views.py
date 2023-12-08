@@ -14,6 +14,36 @@ def home(request):
     return render(request, 'home.html', data)
 
 @login_required
+def checkout(request):
+    user = request.user
+    cart = Cart.objects.filter(user=user).first()
+    playlists = list(cart.products.all())
+    total = 0
+    if playlists:
+        for playlist in playlists:
+            total += playlist.price
+    data = {'playlists': playlists, 'total': total}
+    return render(request, 'checkout.html', data)
+
+@login_required
+def checkout_complete(request):
+    user = request.user
+    cart = Cart.objects.filter(user=user).first()
+    playlists = list(cart.products.all())
+    order = Order.objects.create(user=user)
+    total = 0
+    for playlist in playlists:
+        Subscription.objects.create(playlist=playlist, order=order, price=playlist.price)
+        subscription = Subscription.objects.filter(playlist=playlist, order=order).first()
+        subscription.save()
+        total += playlist.price
+    subscriptions = Subscription.objects.filter(order=order)
+    cart.products.clear()
+    cart.save()
+    data = {'subscriptions': subscriptions, 'total': total}
+    return render(request, 'checkout_complete.html', data)
+
+@login_required
 def add_to_cart(request, pk):
     playlist = Playlist.objects.get(pk=pk)
     user = request.user
@@ -58,6 +88,7 @@ def empty_cart(request):
     messages.success(request, 'Carrito vaciado correctamente')
     return redirect(to='cart')
 
+@login_required
 def playlist_detail(request, pk):
     playlist = Playlist.objects.get(pk=pk)
     songs = Song.objects.filter(playlist=playlist)
@@ -137,6 +168,7 @@ def edit_rating(request, pk):
 
     return render(request, 'ratings/editrating.html', data)
 
+@login_required
 def delete_rating(request, pk):
     playlist = Playlist.objects.get(pk=pk)
     rating = Rating.objects.get(playlist=playlist, user=request.user)
