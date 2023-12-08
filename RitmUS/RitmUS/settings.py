@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'base',
     'library',
     'customuser',
+    "djstripe",
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -140,3 +141,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'customuser.CustomUser'
 AUTHENTICATION_BACKENDS = ['customuser.backends.CustomUserBackend']
+
+import os
+from dotenv import load_dotenv
+load_dotenv()
+STRIPE_LIVE_SECRET_KEY = os.environ.get("STRIPE_API_KEY")
+STRIPE_TEST_SECRET_KEY = os.environ.get("STRIPE_API_KEY")
+STRIPE_LIVE_MODE = False  # Change to True in production
+DJSTRIPE_USE_NATIVE_JSONFIELD = True  # We recommend setting to True for new installations
+DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"
+ 
