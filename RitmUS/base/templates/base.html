@@ -30,11 +30,15 @@
                 </li>
                 {% if user.is_authenticated %}
 
-                        {% if user.is_superuser %}
+                    {% if user.is_superuser %}
                         <li>
                             <a href="{% url 'all_sales' %}">Ventas</a>
                         </li>
-                        {% endif %}
+                    {% else %}
+                        <li>
+                            <a href="{% url 'all_sales' %}">Mis compras</a>
+                        </li>
+                    {% endif %}
 
                     <li>
                         <a href="{% url 'list_incidences' %}">Incidencias</a>

@@ -6,17 +6,38 @@
 
 {% block content %}
 
-    <h2 style="display: block">Ventas</h2> 
+    <h2 style="display: block; margin-top: 10px;">Ventas</h2> 
+
     <div class="ventas">  
+
+        <form class="buscador" method="get" action="{% url 'sales_search' %}">
+
+            <div class="contenedor_buscadores_ventas">
+
+                {% if admin %}
+                    <div class="contenedor_buscadores_ventas"> 
+                        <input class="ibuscador-ventas" type="text" name="search" id="search" placeholder="Inserte nombre de usuario...">
+                    </div>
+                {% endif %}
+                
+                <div class="contenedor_buscadores_ventas">
+                    <label for = "start_date">Entre:</label> 
+                    <input id ="start_date" class="ibuscador-ventas" type="date" name="start_date"></input>   
+                    <input id="end_date" style="margin-bottom: 10px;" class="ibuscador-ventas" type="date" name="end_date"></input>
+                </div>
+                <button class="buscarbutton-ventas" type="submit">Buscar</button>
+            </div>    
+        </form>
+
         {% for order, total_amount, subscriptions in subs_sale %}
             <div class="venta">
                 <div class="contenedor_venta">
-                    <button class="sale_button" onclick="toggleSuscripciones(this)"> Id de venta: {{ order.id }} - Precio: {{total_amount}}€ - Usuario: {{ order.user }}</button>                    
+                    <button class="sale_button" onclick="toggleSuscripciones(this)"> Id de venta: {{ order.id }} - Precio: {{total_amount}}€ - Usuario: {{ order.user }} - Fecha: {{subscriptions.0.init_date}}</button>                    
                     <div style="display: none;">
                         <ul>
                             {% for subscription in subscriptions %}
                                 </ul>
-                                    <a href="{% url 'playlist_detail' pk=subscription.playlist.id %}" class="detalles"> 
+                                    <a style="color:white" href="{% url 'playlist_detail' pk=subscription.playlist.id %}" class="detalles"> 
                                         <h5>Playlist: {{ subscription.playlist.name }}</h5>
                                     </a>
                                     <li>Fecha inicio: {{ subscription.init_date }}</li>

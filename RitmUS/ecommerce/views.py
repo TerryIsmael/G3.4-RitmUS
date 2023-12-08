@@ -3,8 +3,10 @@ from .forms import CreateRatingForm, EditRatingForm
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from base.models import Playlist,User, Song, Rating,Cart,Order,Subscription
+from base.models import Playlist, User, Song, Rating,Cart,Order,Subscription
 from django.contrib import messages
+from django.db.models import Q
+from datetime import datetime
 
 def home(request):
     playlists = Playlist.objects.all()
@@ -160,9 +162,46 @@ def get_queryset(request):
 @login_required
 def get_all_sales(request):
 
+    orders = Order.objects.all()
+    subs_sale = []
+
     if not request.user.is_superuser:
-        return redirect(to='home')
-    else: 
-        orders = Order.objects.all()
-        susbs_sale = [(order, order.total_amount(), Subscription.objects.filter(order=order)) for order in orders]            
-        return render(request, 'sales.html', {'subs_sale': susbs_sale})
+        subs_sale = [(order, order.total_amount(), Subscription.objects.filter(order=order, order__user=request.user)) for order in orders]            
+    else:         
+        subs_sale = [(order, order.total_amount(), Subscription.objects.filter(order=order)) for order in orders]            
+    
+    return render(request, 'sales.html', {'subs_sale': subs_sale, 'admin': request.user.is_superuser})
+    
+@login_required
+def sales_search(request):
+ 
+    query = get_sales_queryset(request)
+    return render(request, 'sales.html', {'subs_sale': query, 'admin': request.user.is_superuser})
+
+@login_required
+def get_sales_queryset(request):
+
+    orders = Order.objects.all()
+    res = Q()
+
+    queryset = request.GET.get("search","")
+    start_date = request.GET.get("start_date","")
+    end_date = request.GET.get("end_date","")
+
+    if request.user.is_superuser and queryset != "":
+        orders = Order.objects.filter(user__username__icontains=queryset)
+
+    if start_date != "":
+        start_date = start_date + " 00:00:00"
+        formatted_start_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S") # Esto no funciona
+        res |= Q(init_date__gte=formatted_start_date)
+
+    if end_date != "":
+        end_date = end_date + " 23:59:59"
+        formatted_end_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
+        res |= Q(init_date__lte=formatted_end_date)
+
+    result_set = [(order, order.total_amount(), Subscription.objects.filter(res).filter(order=order)) for order in orders]
+    result_set = [x for x in result_set if x[2].count() > 0]
+
+    return result_set
