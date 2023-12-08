@@ -561,3 +561,8 @@ ul {
     align-items: center; 
     width: 100%;
 }
+
+.generic-button {
+    border-radius: 6px;
+    padding: 10px;
+}
