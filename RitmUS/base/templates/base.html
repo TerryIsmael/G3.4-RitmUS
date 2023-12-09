@@ -35,15 +35,19 @@
                         <li>
                             <a href="{% url 'all_sales' %}">Ventas</a>
                         </li>
+                        <li>
+                            <a href="{% url 'list_incidences' %}">Incidencias</a>
+                        </li>
                     {% else %}
                         <li>
                             <a href="{% url 'all_sales' %}">Mis compras</a>
                         </li>
+                        <li>
+                            <a href="{% url 'create_incidence' %}">Soporte técnico</a>
+                        </li>
                     {% endif %}
 
-                    <li>
-                        <a href="{% url 'list_incidences' %}">Incidencias</a>
-                    </li>
+                    
                     <li>
                         <div class="dropdown">
                             <span>Bienvenido {{user.username}}</span>

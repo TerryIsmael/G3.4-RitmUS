@@ -565,4 +565,10 @@ ul {
 .generic-button {
     border-radius: 6px;
     padding: 10px;
+    border: 3px solid #671c1c;
+    background-color: #671c1c;
+    color: white;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
 }

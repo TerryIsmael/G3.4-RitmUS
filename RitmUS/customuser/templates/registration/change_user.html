@@ -7,17 +7,25 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 offset-md-4">
-                <h2>Detalles de la cuenta</h2>
+                <h2 style="padding: 10px;">Detalles de la cuenta</h2>
                 <form action="{% url 'change_user' %}" method="post">
                     {% csrf_token %}
                     {{ form.as_p }}
-                    <button type="submit">Modificar datos</button>
+                    <button type="submit" class="generic-button">Modificar datos</button>
                 </form>
-                <span> Para cambiar la contraseña: </span>
-                <a href="{% url 'change_password' %}">
-                    <button type="button">Cambiar contraseña</button>
-                </a>
             </div>
+        </div>
+        <div style="display:flex; align-items: center; justify-content: center;">
+            <span> Para cambiar la contraseña: </span>
+            <a href="{% url 'change_password' %}">
+                <button type="button" class="generic-button">Cambiar contraseña</button>
+            </a>
+        </div>
+        <div style="display:flex; align-items: center; justify-content: center;">
+            <span> Si deseas que se elimine tu cuenta: </span>
+            <a href="{% url 'request_delete_account' %}">
+                <button type="button" class="generic-button">Eliminar cuenta</button>
+            </a>
         </div>
     </div>
 {% endblock %}

@@ -24,14 +24,14 @@ def populate():
         Playlist.objects.create(**playlist_data)
 
     songs = [
-        {'title': 'Undefeatable', 'artist': 'Sega Sound Team', 'genre': 'Rock', 'album': 'Sonic Frontiers','duration': 5 ,'image': 'static/img/Sonic.png', 'release_date': '2021-05-01', 'file_url': 'https://www.youtube.com/watch?v=3NoKAOTE_ZI&ab_channel=SonictheHedgehog', 'playlist': Playlist.objects.get(name='Metálico')},
-        {'title': 'Can´t Hold Me Now', 'artist': 'Criz', 'genre': 'Rock', 'album': 'Borderlands 3:Original Soundtrack','duration': 4 ,'image': 'static/img/Borderlands3.png', 'release_date': '2021-05-01', 'file_url': 'https://www.youtube.com/watch?v=PhXe6OD32g0&ab_channel=GeekMusic-Topic', 'playlist': Playlist.objects.get(name='Metálico')},
-        {'title': 'Pink Venom', 'artist': 'Blackpink', 'genre': 'KPOP', 'album': 'BORN PINK','duration': 3 ,'image': 'static/img/PinkVenom.png', 'release_date': '2021-05-01', 'file_url': 'https://www.youtube.com/watch?v=3NoKAOTE_ZI&ab_channel=SonictheHedgehog', 'playlist': Playlist.objects.get(name='Like BlackPink')},
-        {'title': 'How You Like That', 'artist': 'Blackpink', 'genre': 'KPOP', 'album': 'THE ALBUM','duration': 3 ,'image': 'static/img/HowYouLikeThat.png', 'release_date': '2021-05-01', 'file_url': 'https://www.youtube.com/watch?v=3NoKAOTE_ZI&ab_channel=SonictheHedgehog', 'playlist': Playlist.objects.get(name='Like BlackPink')},
-        {'title': 'K Animal', 'artist': 'DELLAFUENTE, Morad', 'genre': 'Trap', 'album': 'ZIZOU','duration': 3 ,'image': 'static/img/KANIMAL.png', 'release_date': '2021-05-01', 'file_url': 'https://www.youtube.com/watch?v=uUfmk9zp9mk&ab_channel=DELLAFUENTE', 'playlist': Playlist.objects.get(name='DellaBanco')},
-        {'title': 'Me Pelea', 'artist': 'DELLAFUENTE', 'genre': 'Trap', 'album': 'Sencillo','duration': 3 ,'image': 'static/img/MePelea.png', 'release_date': '2021-05-01', 'file_url': 'https://www.youtube.com/watch?v=stC_LSekh4w&ab_channel=DellafuenteVEVO', 'playlist': Playlist.objects.get(name='DellaBanco')},
-        {'title': 'Tú Eres Ajena', 'artist': 'Eddy Herrera', 'genre': 'Merengue', 'album': 'Atrevido','duration': 5 ,'image': 'static/img/Ajena.png', 'release_date': '2021-05-01', 'file_url': 'https://www.youtube.com/watch?v=L_M8XP0nVFM&ab_channel=ForYourRelaxOnly', 'playlist': Playlist.objects.get(name='MerengueLatino')},
-        {'title': 'El Tamarindo', 'artist': 'Kinito Mendez', 'genre': 'Merengue', 'album': 'Los éxitos de Kinito Mendez','duration': 5 ,'image': 'static/img/Tamarindo.png', 'release_date': '2021-05-01', 'file_url': 'https://www.youtube.com/watch?v=UEY7bagwQbU&ab_channel=carlitoswey', 'playlist': Playlist.objects.get(name='MerengueLatino')},    
+        {'title': 'Undefeatable', 'artist': 'Sega Sound Team', 'genre': 'Rock', 'album': 'Sonic Frontiers','duration': 5 ,'image': 'static/img/Sonic.png', 'release_date': '2021-05-01T00:00:00+00:00', 'file_url': 'https://www.youtube.com/watch?v=3NoKAOTE_ZI&ab_channel=SonictheHedgehog', 'playlist': Playlist.objects.get(name='Metálico')},
+        {'title': 'Can´t Hold Me Now', 'artist': 'Criz', 'genre': 'Rock', 'album': 'Borderlands 3:Original Soundtrack','duration': 4 ,'image': 'static/img/Borderlands3.png', 'release_date': '2021-05-01T00:00:00+00:00', 'file_url': 'https://www.youtube.com/watch?v=PhXe6OD32g0&ab_channel=GeekMusic-Topic', 'playlist': Playlist.objects.get(name='Metálico')},
+        {'title': 'Pink Venom', 'artist': 'Blackpink', 'genre': 'KPOP', 'album': 'BORN PINK','duration': 3 ,'image': 'static/img/PinkVenom.png', 'release_date': '2021-05-01T00:00:00+00:00', 'file_url': 'https://www.youtube.com/watch?v=3NoKAOTE_ZI&ab_channel=SonictheHedgehog', 'playlist': Playlist.objects.get(name='Like BlackPink')},
+        {'title': 'How You Like That', 'artist': 'Blackpink', 'genre': 'KPOP', 'album': 'THE ALBUM','duration': 3 ,'image': 'static/img/HowYouLikeThat.png', 'release_date': '2021-05-01T00:00:00+00:00', 'file_url': 'https://www.youtube.com/watch?v=3NoKAOTE_ZI&ab_channel=SonictheHedgehog', 'playlist': Playlist.objects.get(name='Like BlackPink')},
+        {'title': 'K Animal', 'artist': 'DELLAFUENTE, Morad', 'genre': 'Trap', 'album': 'ZIZOU','duration': 3 ,'image': 'static/img/KANIMAL.png', 'release_date': '2021-05-01T00:00:00+00:00', 'file_url': 'https://www.youtube.com/watch?v=uUfmk9zp9mk&ab_channel=DELLAFUENTE', 'playlist': Playlist.objects.get(name='DellaBanco')},
+        {'title': 'Me Pelea', 'artist': 'DELLAFUENTE', 'genre': 'Trap', 'album': 'Sencillo','duration': 3 ,'image': 'static/img/MePelea.png', 'release_date': '2021-05-01T00:00:00+00:00', 'file_url': 'https://www.youtube.com/watch?v=stC_LSekh4w&ab_channel=DellafuenteVEVO', 'playlist': Playlist.objects.get(name='DellaBanco')},
+        {'title': 'Tú Eres Ajena', 'artist': 'Eddy Herrera', 'genre': 'Merengue', 'album': 'Atrevido','duration': 5 ,'image': 'static/img/Ajena.png', 'release_date': '2021-05-01T00:00:00+00:00', 'file_url': 'https://www.youtube.com/watch?v=L_M8XP0nVFM&ab_channel=ForYourRelaxOnly', 'playlist': Playlist.objects.get(name='MerengueLatino')},
+        {'title': 'El Tamarindo', 'artist': 'Kinito Mendez', 'genre': 'Merengue', 'album': 'Los éxitos de Kinito Mendez','duration': 5 ,'image': 'static/img/Tamarindo.png', 'release_date': '2021-05-01T00:00:00+00:00', 'file_url': 'https://www.youtube.com/watch?v=UEY7bagwQbU&ab_channel=carlitoswey', 'playlist': Playlist.objects.get(name='MerengueLatino')},    
     ]
 
     if Song.objects.all().count() > 0:
@@ -53,10 +53,10 @@ def populate():
         CustomUser.objects.create(**user_data)
 
     orders = [
-        {'user': CustomUser.objects.get(username='usuario1'), 'purchase_date': '2023-11-01 00:00:00'},
-        {'user': CustomUser.objects.get(username='usuario1'), 'purchase_date': '2023-12-04 17:50:01'},
-        {'user': CustomUser.objects.get(username='usuario1'), 'purchase_date': '2023-12-06 11:00:00'},
-        {'user': CustomUser.objects.get(username='usuario2'), 'purchase_date': '2023-12-07 23:59:00'},
+        {'user': CustomUser.objects.get(username='usuario1'), 'purchase_date': '2023-11-01T00:00:00+01:00'},
+        {'user': CustomUser.objects.get(username='usuario1'), 'purchase_date': '2023-12-04T17:50:01+01:00'},
+        {'user': CustomUser.objects.get(username='usuario1'), 'purchase_date': '2023-12-06T11:00:00+01:00'},
+        {'user': CustomUser.objects.get(username='usuario2'), 'purchase_date': '2023-12-07T23:59:00+01:00'},
     ]
 
     if Order.objects.all().count() > 0:
@@ -66,11 +66,11 @@ def populate():
         Order.objects.create(**order_data)
 
     subscriptions = [
-        {'init_date': '2023-11-01 00:00:00', 'end_date': '2023-11-30 00:00:00', 'price': 10, 'is_favourite': False, 'playlist': Playlist.objects.get(name='Metálico'), 'order': Order.objects.filter(user=CustomUser.objects.get(username='usuario1'))[0]},
-        {'init_date': '2023-12-04 17:50:01', 'end_date': '2024-01-03 17:50:01', 'price': 20, 'is_favourite': True, 'playlist': Playlist.objects.get(name='Like BlackPink'), 'order': Order.objects.filter(user=CustomUser.objects.get(username='usuario1'))[1]},
-        {'init_date': '2023-12-04 17:50:01', 'end_date': '2024-01-03 17:50:01', 'price': 15, 'is_favourite': False, 'playlist': Playlist.objects.get(name='DellaBanco'), 'order': Order.objects.filter(user=CustomUser.objects.get(username='usuario1'))[1]},
-        {'init_date': '2023-12-06 11:00:00', 'end_date': '2024-01-05 11:00:00', 'price': 12, 'is_favourite': True, 'playlist': Playlist.objects.get(name='MerengueLatino'), 'order': Order.objects.filter(user=CustomUser.objects.get(username='usuario1'))[2]},
-        {'init_date': '2023-12-07 23:59:00', 'end_date': '2024-01-06 23:59:00', 'price': 20, 'is_favourite': False, 'playlist': Playlist.objects.get(name='Like BlackPink'), 'order': Order.objects.filter(user=CustomUser.objects.get(username='usuario2'))[0]},
+        {'init_date': '2023-11-01T00:00:00+01:00', 'end_date': '2023-11-30T00:00:00+01:00', 'price': 10, 'is_favourite': False, 'playlist': Playlist.objects.get(name='Metálico'), 'order': Order.objects.filter(user=CustomUser.objects.get(username='usuario1'))[0]},
+        {'init_date': '2023-12-04T17:50:01+01:00', 'end_date': '2024-01-03T17:50:01+01:00', 'price': 20, 'is_favourite': True, 'playlist': Playlist.objects.get(name='Like BlackPink'), 'order': Order.objects.filter(user=CustomUser.objects.get(username='usuario1'))[1]},
+        {'init_date': '2023-12-04T17:50:01+01:00', 'end_date': '2024-01-03T17:50:01+01:00', 'price': 15, 'is_favourite': False, 'playlist': Playlist.objects.get(name='DellaBanco'), 'order': Order.objects.filter(user=CustomUser.objects.get(username='usuario1'))[1]},
+        {'init_date': '2023-12-06T11:00:00+01:00', 'end_date': '2024-01-05T11:00:00+01:00', 'price': 12, 'is_favourite': True, 'playlist': Playlist.objects.get(name='MerengueLatino'), 'order': Order.objects.filter(user=CustomUser.objects.get(username='usuario1'))[2]},
+        {'init_date': '2023-12-07T23:59:00+01:00', 'end_date': '2024-01-06T23:59:00+01:00', 'price': 20, 'is_favourite': False, 'playlist': Playlist.objects.get(name='Like BlackPink'), 'order': Order.objects.filter(user=CustomUser.objects.get(username='usuario2'))[0]},
     ]
 
     if Subscription.objects.all().count() > 0:

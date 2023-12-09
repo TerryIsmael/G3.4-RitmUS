@@ -1,22 +1,28 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-#from django.contrib.auth.models import User
 from enum import Enum
 import datetime
 from datetime import timedelta
 
 User=get_user_model()
 
-class status(Enum):
+class Status(Enum):
     PENDING = 'Pendiente'
     IN_PROGRESS = 'En progreso'
     RESOLVED = 'Resuelta'
 
+class Type(Enum):
+    BUG = 'Error'
+    FEATURE = 'Funcionalidad'
+    DEL_ACCOUNT = 'Borrar cuenta'
+    OTHER = 'Otros'
+
 class Incidence(models.Model):
-    status = models.CharField(max_length=50, choices=[(state.name, state.value) for state in status], default=status.PENDING.name)
+    status = models.CharField(max_length=50, choices=[(state.name, state.value) for state in Status], default=Status.PENDING.name)
     description = models.TextField(max_length=500)
     date = models.DateTimeField(default = datetime.datetime.now())
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    type = models.CharField(max_length=50, choices=[(t.name, t.value) for t in Type], default=Type.OTHER.name)
     
 class Playlist(models.Model):
     name = models.CharField(max_length=50)

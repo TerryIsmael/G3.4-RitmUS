@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from base.models import  User, Incidence
 
 
@@ -108,9 +108,23 @@ def create_incidence(request):
 
     return render(request, 'incidences/newincidence.html', data)
 
+@user_passes_test(lambda u: u.is_superuser, login_url='home')
 def list_incidences(request):
-    incidences = Incidence.objects.filter(user=request.user) 
+    incidences = Incidence.objects.all() 
     data = {
         'incidences': incidences
     }
     return render(request, 'incidences/listincidence.html', data)
+
+@login_required
+def request_delete_account(request):
+    if request.method == 'GET':
+        return render(request, 'registration/delete_account.html')
+    if request.method == 'POST':
+        user=request.user
+        user.is_active=False
+        user.save()
+        Incidence.objects.create(user=user,type="DELETE_ACCOUNT",description="El usuario ha solicitado borrar su cuenta")
+        messages.success(request, 'Solicitud enviada correctamente')
+        return redirect(to='home')
+    

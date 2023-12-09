@@ -1,6 +1,5 @@
 from django import forms
 from .models import CustomUser as User
-#from django.contrib.auth.models import User
 from django.contrib.auth.forms import BaseUserCreationForm, AuthenticationForm, SetPasswordForm
 from base.models import Incidence
 
@@ -8,7 +7,12 @@ class CreateIncidenceForm(forms.ModelForm):
     
     class Meta:
         model = Incidence
-        fields = ['description']
+        fields = ['type','description']
+
+    def __init__(self, *args, **kwargs):
+        super(CreateIncidenceForm, self).__init__(*args, **kwargs)
+        self.fields['type'].label = "Tipo de incidencia"
+        self.fields['description'].label = "Descríbenos el problema"
 
     
 class CustomUserLoginForm(AuthenticationForm):
@@ -17,7 +21,7 @@ class CustomUserLoginForm(AuthenticationForm):
         self.fields['username'] = forms.EmailField(widget=forms.TextInput(attrs={'autofocus': True}))
         self.fields['username'].label = "Correo electrónico"
 
-class CustomUserCreationForm(BaseUserCreationForm):
+class CustomUserCreationForm(BaseUserCreationForm): 
     email = forms.EmailField(required=True)
     class Meta:
         model = User
