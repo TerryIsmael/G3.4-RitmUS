@@ -45,6 +45,4 @@ class CustomUserChangePasswordForm(SetPasswordForm):
     def __init__(self, *args, **kwargs):
         request = kwargs.pop("request")
         user = request.user
-
-        # Pass the actual user object to SetPasswordForm
         super(CustomUserChangePasswordForm, self).__init__(user, *args, **kwargs)

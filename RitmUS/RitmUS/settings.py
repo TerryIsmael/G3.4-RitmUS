@@ -146,4 +146,7 @@ from dotenv import load_dotenv
 load_dotenv()
 STRIPE_API_KEY = os.environ.get("STRIPE_API_KEY")
 STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
+
+LOGIN_URL = '/user/login/'
+LOGIN_REDIRECT_URL = 'home'
  

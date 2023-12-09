@@ -135,8 +135,11 @@ def add_to_cart(request, pk):
 def cart(request):
     user = request.user
     cart = Cart.objects.filter(user=user).first()
-    playlists = list(cart.products.all())
-    print(playlists)
+    playlists= None
+    if cart:
+        playlists = list(cart.products.all())
+    else:
+        cart = Cart.objects.create(user=user)
     total = 0
     if playlists:
         for playlist in playlists:

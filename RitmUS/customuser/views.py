@@ -4,12 +4,8 @@ from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required,user_passes_test
 from base.models import  User, Incidence
-
-
-
-
 
 def custom_login(request):
     data = {

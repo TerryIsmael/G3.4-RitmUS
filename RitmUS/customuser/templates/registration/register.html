@@ -19,7 +19,7 @@
                     {% csrf_token %}
 
                     {{ form.as_p }}
-                    <a href="{% url 'login' %}">¿Ya tienes una cuenta? Inicia sesión</a>
+                    <a href="{% url 'custom_login' %}">¿Ya tienes una cuenta? Inicia sesión</a>
                     <button type="submit">Registrarse</button>
 
                 </form>
