@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Biblioteca{% endblock %}
+
+{% block content %}
+   <div class="detalle-playlist">
+       
+       <div class="info-playlist">
+        <div>
+            <img src="{{ subscription.playlist.image.url }}" class="cover-image"  alt="imagen playlist">
+            <a href="/library/subscription/toggle_favourite/{{subscription.id}}">
+                <button class="heart-toggle">
+                    {% if subscription.is_favourite %}
+                       <strong style="color: #ffffff ; font-size: 200%; justify-content: center;" >❤️</strong>
+                    {% else %}
+                        <strong style="color: #ffffff ; font-size: 200%; justify-content: center;">🤍</strong> 
+                    {% endif %}
+                </button>
+            </a>
+        </div>
+            <h2>{{ subscription.playlist.name }}</h2>
+            <p>{{ subscription.playlist.genre }}</p>
+            <p>Descripción: {{ subscription.playlist.description }}</p>
+            <p>La suscripción finaliza el: {{subscription.end_date}} </p>
+        <div>
+        {%if song_link%}
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/{{song_link}}?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        {%endif%}
+        </div>    
+           <h1>Canciones:</h1>
+           {% if song_link %}
+           <ul>
+                {% for song in songs %}
+                    <li > <img src="{{ song.image.url }}" class="song-image"  alt="imagen cancion"> {{ song.title }} - {{ song.artist }} - {{ song.duration }}min<a href="{% url 'library_playlist_detail' pk=subscription.playlist.id %}?song={{song.id}}" ><i class="fas fa-play" style="color: red; padding-left: 20px;"></i></a> </li>
+                {% endfor %}
+            </ul>
+           {% else %}
+           <ul>
+               {% for song in songs %}
+                   <li > <img src="{{ song.image.url }}" class="song-image"  alt="imagen cancion"> {{ song.title }} - {{ song.artist }} - {{ song.duration }}min<a href="{% url 'library_playlist_detail' pk=subscription.playlist.id %}?song={{song.id}}" target="_blank"><i class="fas fa-play" style="color: red; padding-left: 20px;"></i></a> </li>
+               {% endfor %}
+           </ul>
+           {% endif %}
+       </div>
+   </div>
+{% endblock %}

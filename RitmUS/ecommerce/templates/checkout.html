@@ -1,0 +1,58 @@
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  var stripe = Stripe(stripe_key);
+</script>
+
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Pago{% endblock %}
+
+{% block content %}
+<h2>Pago</h2>
+{% if playlists %}
+    <table class="table table-striped table-hover">
+        <tr>
+            <th>Imagen</th>
+            <th>Nombre</th>
+            <th>Género</th>
+            <th>Precio</th>
+        </tr>
+        {% for item in playlists %}
+        <tr>
+            <td><img src="{{ item.image.url }}" class="song-image" ></td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.genre }}</td>
+            <td>{{ item.price }}€</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td></td>
+            <td>Total: {{ total }}€</td>
+            <td>
+                <form action="{% url 'checkout' %}" method="post">
+                    {% csrf_token %}
+                    <script
+                        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                        data-key= {{stripe_key}}
+                        data-amount= {{stripe_total}}
+                        data-name="RitmUS"
+                        data-description="Finalizar compra"
+                        data-image="https://i.imgur.com/ntlUdK0.png"
+                        data-locale="auto"
+                        data-currency="eur"
+                        data-email="false"
+                        >
+                    </script>
+              </form>
+            </td>
+            <td><a href="{% url 'cart' %}"><button class="generic-button">Cancelar pedido</button></a></td>
+        </tr>
+    </table>
+{% else %}
+    <p>Algo va mal</p>
+{% endif %}
+
+
+{% endblock %}

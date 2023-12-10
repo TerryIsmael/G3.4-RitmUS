@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Login{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <h2>Iniciar sesión</h2>
+                <form action="{% url 'custom_login' %}" method="post" style="font-size:large ;">
+                    {% csrf_token %}
+                    {{ form.as_p}}
+                    <button type="submit" class="generic-button">Iniciar sesión</button>
+                </form>
+                <p>¿No tienes cuenta? <a href="{% url 'register' %}">Regístrate</a></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

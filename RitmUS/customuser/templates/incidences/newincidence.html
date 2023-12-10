@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Crear incidencia{% endblock %}
+
+{% block content %}
+        <div class="row" style="display:flex; align-items: center; justify-content: center; flex-direction: column;">
+            <div>
+                <h2>Crear incidencia</h2>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    </div>
+                    <input type="hidden" name="user" value="{{ request.user }}">
+                    <div style="display:flex; align-items: center; justify-content: center;">
+                        <button type="reset" class="generic-button" style="padding: 3px;">Limpiar formulario</button>
+                        <button type="submit" class="generic-button" style="padding: 3px;">Crear incidencia</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+{% endblock %}

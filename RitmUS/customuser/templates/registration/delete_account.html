@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Login{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <h2>Eliminar cuenta</h2>
+                <p>¿Estás seguro de que quieres eliminar tu cuenta?</p>
+                <p>ESTA ACCIÓN ES IRREVERSIBLE.</p>
+                <p>Si quieres volver a usar RitmUS, tendrás que registrarte de nuevo.</p>
+                <p>Si quieres eliminar tu cuenta, pulsa el botón de abajo.</p>
+
+                <form action="{% url 'request_delete_account' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="generic-button" style="background-color: rgb(207, 103, 65);">Eliminar cuenta</button>
+                </form>
+                <p> ¿No quieres eliminar tu cuenta? <a href = "{% url 'change_user' %}" > <button class="generic-button">Volver a tu perfil</button></a></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

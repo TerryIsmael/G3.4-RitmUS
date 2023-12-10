@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Tienda{% endblock %}
+
+{% block content %}
+
+    
+    
+    <form class="buscador" method="get" action="{% url 'playlist_search' %}">
+        <input class="ibuscador" type="text" name="search" id="search" placeholder="Introduzca título o género...">
+
+        <button class="buscarbutton"type="submit">Buscar</button>
+        
+        <select class="selector"  name="price_range" id="price_range">
+            <option value="">Selecciona un rango de precio</option>
+            <option value="0-10">0€/mes - 10€/mes</option>
+            <option value="10-20">10€/mes - 20€/mes</option>
+            <option value="20-30">20€/mes - 30€/mes</option>
+            <option value="30-1000">Más de 30€/mes</option>
+        </select>
+    </form>
+
+    <h2 style="margin-left: 23px;">Tienda</h2>
+
+    <div class="productos">
+        {% if playlists %}
+            {% for p in playlists %}
+            
+            <div class="producto">
+                <a href="{% url 'playlist_detail' pk=p.pk %}" class="detalles">    
+                    <div class="contenedor_producto">
+                    
+                        <img src="{{ p.image.url }}" alt="imagen producto">
+                    
+                        <div class="detalles">
+                            <h6>{{ p.genre }}</h6>
+                            <h2>{{ p.name }}</h2>
+                            <h5>{{ p.price }}€/mes</h5>
+                        </div>
+                    </div>
+                </a>
+                
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>No hay playlists que coincidan con tu búsqueda</p>
+        {% endif %}
+    </div>
+{% endblock %}

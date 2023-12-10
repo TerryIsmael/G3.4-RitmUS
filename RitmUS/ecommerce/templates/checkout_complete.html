@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Pago{% endblock %}
+
+{% block content %}
+    {% if success %}
+        <h2>¡Tu suscripción ha sido completada!</h2>
+    {% else %}
+        <h2>Ha habido un problema con el procesamiento del pago.</h2>
+        <h2>Si el problema persiste, contacte con el soporte técnico.</h2>
+        <h2>Error:</h2>
+        <p>{{ error_message }}</p>
+        <a href="{% url 'cart' %}" ><button class = "generic-button">Reintentar</button></a>
+    {% endif %}
+    <a href="{% url 'index' %}"><button class="generic-button">Ir a Biblioteca</button></a>
+    <a href="{% url 'home' %}"><button class="generic-button">Ir a Tienda</button></a>
+{% endblock %}
