@@ -12,5 +12,5 @@ class AdminCustomUser(admin.ModelAdmin):
     make_active.short_description = "Activar usuarios"
     make_inactive.short_description = "Desactivar usuarios"
     actions = [make_active, make_inactive]
-# Register your models here.
+
 admin.site.register(CustomUser, AdminCustomUser)

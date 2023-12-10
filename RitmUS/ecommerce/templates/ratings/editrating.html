@@ -13,8 +13,8 @@
                     {{ form.as_p }}
                     <input type="hidden" name="user" value="{{ request.user }}">
                     <input type="hidden" name="playlist" value="{{ playlist }}">
-                    <button type="reset">Limpiar formulario</button>
-                    <button type="submit">Publicar</button>
+                    <a href="/playlist/{{playlist.id}}"><button type="button" class="generic-button">Cancelar</button></a>
+                    <button type="submit" class="generic-button">Publicar</button>
                 </form>
             </div>
         </div>

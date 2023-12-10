@@ -21,14 +21,14 @@
             <td>{{ item.name }}</td>
             <td>{{ item.genre }}</td>
             <td>{{ item.price }}€</td>
-            <td><a href="{% url 'remove_from_cart' pk=item.pk %}" class="btn btn-secondary">Eliminar</a></td>
+            <td><a href="{% url 'remove_from_cart' pk=item.pk %}"><button class="generic-button">Eliminar</button></a></td>
         </tr>
         {% endfor %}
         <tr>
             <td></td>
             <td>Total: {{ total }}€</td>
-            <td><a href="{% url 'checkout' %}" class="btn btn-secondary">Revisar</a></td>
-            <td><a href="{% url 'empty_cart' %}" class="btn btn-secondary">Vaciar carrito</a></td>
+            <td><a href="{% url 'checkout' %}"><button class="generic-button">Revisar</button></a></td>
+            <td><a href="{% url 'empty_cart' %}"><button class="generic-button">Vaciar carrito</button></a></td>
         </tr>
     </table>
 {% else %}

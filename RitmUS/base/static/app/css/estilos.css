@@ -88,12 +88,12 @@ nav > ul > li > a {
     text-decoration: none;
 }
 
-
 #contenido {
     width: 80%;
     margin: auto;
     max-width: 1280px;
     min-height: 80vh;
+    padding: 20px;
 }
 
 .productos {
@@ -571,4 +571,45 @@ ul {
     font-size: 16px;
     margin: 10px;
     cursor: pointer;
+}
+
+.dropdown-cart {
+    position: relative;
+    display: inline-block;
+    
+}
+
+.dropdown-cart-content a {
+    color: #ffffff;
+    text-decoration: none;
+    margin-bottom: 3px;
+    display: block;
+}
+
+.dropdown-cart-content {
+    display: none;
+    position: absolute;
+    background-color: #4b1515;
+    min-width: 320px;
+    border-width: 2px;
+    border-color: #000000;
+    z-index: 1;
+}
+  
+.dropdown-cart:hover .dropdown-cart-content {
+    display: block;
+    color: #ffffff;
+}
+
+.dropdown-cart span {
+    white-space: nowrap;
+    padding: 5px;
+}
+.producto-carrito{
+    padding:10px
+}
+
+.producto-carrito:hover {
+    background-color: #411111;
+    color: white;
 }

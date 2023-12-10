@@ -4,12 +4,8 @@ from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required,user_passes_test
 from base.models import  User, Incidence
-
-
-
-
 
 def custom_login(request):
     data = {
@@ -18,12 +14,16 @@ def custom_login(request):
     if request.method == 'POST':
         form = CustomUserLoginForm(data=request.POST)
         if form.is_valid():
-            form.save()
-            userAux = User.objects.filter(email=form.cleaned_data['email']).first()
+            userAux = User.objects.filter(email=form.cleaned_data['username']).first()
+            if userAux is None:
+                messages.error(request, 'Usuario no registrado')
+                return redirect(to='login')
             user = authenticate(
-                username= userAux.username,
+                request,
+                username=form.cleaned_data['username'],
                 password=form.cleaned_data['password']
             )
+            print(user)
             login(request, user)
             messages.success(request, 'Logueado')
             return redirect(to='home')
@@ -40,12 +40,10 @@ def register(request):
         form = CustomUserCreationForm(data=request.POST)
         if form.is_valid():
             form.save()
-            print(User.objects.filter(email=form.cleaned_data['email']).first())
             user = authenticate(
                 username=form.cleaned_data['email'],
                 password=form.cleaned_data['password1']
             )
-            print(form.cleaned_data['email'], form.cleaned_data['password1'])
             login(request, user)
             messages.success(request, 'Registrado correctamente')
             return redirect(to='home')
@@ -127,4 +125,3 @@ def request_delete_account(request):
         Incidence.objects.create(user=user,type="DELETE_ACCOUNT",description="El usuario ha solicitado borrar su cuenta")
         messages.success(request, 'Solicitud enviada correctamente')
         return redirect(to='home')
-    

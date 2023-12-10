@@ -11,23 +11,32 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
-import os
+from dotenv import load_dotenv
+from django.core.management.utils import get_random_secret_key
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv(Path.joinpath(BASE_DIR, "RitmUS" , '.env'))
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'photos')
 MEDIA_URL = '/media/'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-*tzoaem=8(1$@@m1$re^v*so^k$i7zroq#7%tjm4=7feuar6zl'
+SECRET_KEY = os.environ.get("SECRET_KEY",default=get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", 'False').lower() == 'true'
+if DEBUG:
+    # Configuraciones de desarrollo
+    SECURE_SSL_REDIRECT = False
+else:
+    # Configuraciones de producción
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
 
-ALLOWED_HOSTS = ["localhost","127.0.0.1"]
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
@@ -73,6 +82,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'RitmUS.context_processor.cart'    
             ],
         },
     },
@@ -131,19 +141,30 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-
+STATIC_ROOT= os.path.join(BASE_DIR, 'static/')
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+LOGIN_URL = '/user/login/'
+LOGIN_REDIRECT_URL = 'home'
 
 AUTH_USER_MODEL = 'customuser.CustomUser'
 AUTHENTICATION_BACKENDS = ['customuser.backends.CustomUserBackend']
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-import os
-from dotenv import load_dotenv
-load_dotenv()
+
+
 STRIPE_API_KEY = os.environ.get("STRIPE_API_KEY")
 STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
- 
+
+
+
+
+EMAIL_HOST = os.environ.get("SMTP_SERVER")
+EMAIL_PORT = os.environ.get("SMTP_PORT")
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")

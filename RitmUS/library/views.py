@@ -22,8 +22,12 @@ def library_playlist_detail(request, pk):
     playlist = Playlist.objects.get(pk=pk)
     subscription = Subscription.objects.filter(playlist=playlist, order__user= request.user, end_date__gt=timezone.now()).first()
     songs = Song.objects.filter(playlist=playlist)
-
-    return render(request, 'library_playlist_details.html', {'subscription': subscription, 'songs': songs})
+    song_id=request.GET.get('song', None)
+    if song_id:
+        song_link=Song.objects.get(pk=song_id).file_url
+    else:
+        song_link=None
+    return render(request, 'library_playlist_details.html', {'subscription': subscription, 'songs': songs, 'song_link': song_link})
 
 @login_required
 def toggle_favourite(request, id):

@@ -24,13 +24,13 @@
                 <span class="star">| {{averageRating}} / Usuarios: {{ users }} </span>
             {% if user.is_authenticated %}
                 {% if cart %}
-                    <a href="{% url 'cart' %}" class="btn btn-secondary">Ir al carrito <i class="fa-solid fa-cart-shopping"></i></a>
+                    <a href="{% url 'cart' %}" class="btn btn-secondary generic-button">Ir al carrito <i class="fa-solid fa-cart-shopping"></i></a>
                 {% else %}
                     {% if hasSuscription %}
                         <h3>Ya tienes una suscripción activa</h3>
-                        <a href="{% url 'library_playlist_detail' pk=playlist.pk %}" class="btn btn-secondary">Ir a biblioteca</a>
+                        <a href="{% url 'library_playlist_detail' pk=playlist.pk %}" class="btn btn-secondary generic-button">Ir a biblioteca</a>
                     {% else %}
-                        <a href="{% url 'add_to_cart' pk=playlist.pk %}" class="btn btn-secondary">Añadir al carrito</a>
+                        <a href="{% url 'add_to_cart' pk=playlist.pk %}" class="btn btn-secondary generic-button">Añadir al carrito</a>
                     {% endif %}
 
                 {% endif %}    
@@ -47,10 +47,10 @@
    </div>
     {% if user.is_authenticated %}
         {% if ratingUser %}
-            <a href="{% url 'edit_rating' pk=playlist.pk %}" class="btn btn-secondary">Editar comentario</a>
-            <a href="{% url 'delete_rating' pk=playlist.pk %}" class="btn btn-secondary">Eliminar comentario</a>
+            <a href="{% url 'edit_rating' pk=playlist.pk %}"><button class="generic-button">Editar comentario</button></a>
+            <a href="{% url 'delete_rating' pk=playlist.pk %}"><button class="generic-button">Eliminar comentario</button></a>
         {% else %}
-            <a href="{% url 'create_rating' pk=playlist.pk %}" class="btn btn-secondary">Comentar</a>
+            <a href="{% url 'create_rating' pk=playlist.pk %}"><button class="generic-button">Comentar</button></a>
         {% endif %}
     {% endif %}
    {% if ratings %}
