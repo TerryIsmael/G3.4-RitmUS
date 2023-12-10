@@ -73,6 +73,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'RitmUS.context_processor.cart'    
             ],
         },
     },
@@ -149,4 +150,16 @@ STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
 
 LOGIN_URL = '/user/login/'
 LOGIN_REDIRECT_URL = 'home'
- 
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.environ.get("SMTP_SERVER")
+EMAIL_PORT = os.environ.get("SMTP_PORT")
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get("CLIENT_ID")
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET =  os.environ.get("CLIENT_SECRET")
+JSON_CREDENTIALS = os.environ.get("JSON_CREDENTIALS")

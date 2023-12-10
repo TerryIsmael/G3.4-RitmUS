@@ -20,9 +20,18 @@
     <div>
         <nav id="nav">
             <ul>
+                {% if user.is_authenticated %}
                 <li>
-                    <a href="{% url 'cart' %}"><i class="fa-solid fa-cart-shopping"></i></a>
+                    <div class="dropdown-cart">
+                        <span><span style="padding:5px">{{cart_playlist_number}}</span><a href="{% url 'cart' %}"><i class="fa-solid fa-cart-shopping"></i></a></span>
+                        <div class="dropdown-cart-content">
+                        {% for item in cart_playlists %}
+                        <a href="/playlist/{{item.id}}"><div class="producto-carrito"><img src="{{item.image.url}}" class="song-image"/> <span>{{ item.name }} - {{ item.price }}€</span></div></a>
+                        {% endfor %}
+                        </div>
+                    </div>
                 </li>
+                {% endif %}
                 <li>
                     <a href="/">Tienda</a>
                 </li>
@@ -38,12 +47,12 @@
                         <li>
                             <a href="{% url 'list_incidences' %}">Incidencias</a>
                         </li>
+                        <li>
+                            <a href="/admin">Administrador</a>
+                        </li>
                     {% else %}
                         <li>
                             <a href="{% url 'all_sales' %}">Mis compras</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'create_incidence' %}">Soporte técnico</a>
                         </li>
                     {% endif %}
 
@@ -52,6 +61,9 @@
                         <div class="dropdown">
                             <span>Bienvenido {{user.username}}</span>
                             <div class="dropdown-content">
+                                {% if not user.is_superuser %}
+                                <a href="{% url 'create_incidence' %}">Soporte técnico</a>
+                                {% endif %}
                                 <a href="{% url 'change_user' %}">Editar perfil</a>
                                 <a href="{% url 'logout' %}">Cerrar sesión</a>
                             </div>

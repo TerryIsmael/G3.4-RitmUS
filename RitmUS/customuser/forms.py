@@ -2,6 +2,7 @@ from django import forms
 from .models import CustomUser as User
 from django.contrib.auth.forms import BaseUserCreationForm, AuthenticationForm, SetPasswordForm
 from base.models import Incidence
+from django.contrib.auth import authenticate
 
 class CreateIncidenceForm(forms.ModelForm):
     
@@ -12,14 +13,23 @@ class CreateIncidenceForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CreateIncidenceForm, self).__init__(*args, **kwargs)
         self.fields['type'].label = "Tipo de incidencia"
+        self.fields['type'].choices = self.fields['type'].choices 
         self.fields['description'].label = "Descríbenos el problema"
 
-    
 class CustomUserLoginForm(AuthenticationForm):
+    username =  forms.EmailField(max_length=254,widget=forms.TextInput(attrs={'autofocus': True}),label="Correo electrónico")
+    password = forms.CharField(strip=False,widget=forms.PasswordInput(attrs={'style': 'width: 100%;'}),label="Contraseña")
+    error_messages = {
+            "invalid_login": (
+                "Por favor, introduzca un correo electrónico y una contraseña correctos."
+                "Ambos campos pueden ser sensibles a mayúsculas."
+            ),
+            "inactive": ("Esta cuenta ha sido inhabilitada."),
+    }
     def __init__(self, *args, **kwargs):
         super(CustomUserLoginForm, self).__init__(*args, **kwargs)
-        self.fields['username'] = forms.EmailField(widget=forms.TextInput(attrs={'autofocus': True}))
-        self.fields['username'].label = "Correo electrónico"
+
+
 
 class CustomUserCreationForm(BaseUserCreationForm): 
     email = forms.EmailField(required=True)

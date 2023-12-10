@@ -41,11 +41,13 @@
                         data-description="Finalizar compra"
                         data-image="https://i.imgur.com/ntlUdK0.png"
                         data-locale="auto"
-                        data-currency="eur">
+                        data-currency="eur"
+                        data-email="false"
+                        >
                     </script>
               </form>
             </td>
-            <td><a href="{% url 'cart' %}" class="btn btn-secondary">Cancelar pedido</a></td>
+            <td><a href="{% url 'cart' %}"><button class="generic-button">Cancelar pedido</button></a></td>
         </tr>
     </table>
 {% else %}
