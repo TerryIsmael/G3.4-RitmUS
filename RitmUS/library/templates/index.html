@@ -13,11 +13,11 @@
         <button class="buscarbutton-biblioteca" type="submit">Buscar</button>
 
         {% if queryset and queryfav == "on" %}
-            <span>Buscando por "{{ queryset }} y Favoritos"<a href='http://127.0.0.1:8000/library/playlist/search/' ></span><strong style="color:red">✖</strong></a>
+            <span>Buscando por "{{ queryset }} y Favoritos"<a href='/library/playlist/search/' ></span><strong style="color:red">✖</strong></a>
         {% elif queryset %}
-            <span>Buscando por "{{ queryset }}"<a href='http://127.0.0.1:8000/library/playlist/search/' ></span><strong style="color:red">✖</strong></a>
+            <span>Buscando por "{{ queryset }}"<a href='/library/playlist/search/' ></span><strong style="color:red">✖</strong></a>
         {% elif queryfav == "on" %}
-            <span>Buscando por Favoritos"<a href='http://127.0.0.1:8000/library/playlist/search/' ></span><strong style="color:red">✖</strong></a>
+            <span>Buscando por Favoritos"<a href='/library/playlist/search/' ></span><strong style="color:red">✖</strong></a>
         {% endif %}     
     </form>
 
