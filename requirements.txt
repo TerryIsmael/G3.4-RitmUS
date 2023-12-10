@@ -9,3 +9,4 @@ stripe==2.60.0
 google-auth==2.25.2
 social-auth-app-django==5.4.0
 google_api_python_client==2.110.0
+python-dotenv==1.0.0

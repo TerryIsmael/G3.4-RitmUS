@@ -11,21 +11,22 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
-import os
+from dotenv import load_dotenv
+from django.core.management.utils import get_random_secret_key
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv(Path.joinpath(BASE_DIR, "RitmUS" , '.env'))
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'photos')
 MEDIA_URL = '/media/'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-*tzoaem=8(1$@@m1$re^v*so^k$i7zroq#7%tjm4=7feuar6zl'
+SECRET_KEY = os.environ.get("SECRET_KEY",default=get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG")
 
 ALLOWED_HOSTS = ["localhost","127.0.0.1"]
 
@@ -132,34 +133,30 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-
+STATIC_ROOT= os.path.join(BASE_DIR, 'static/')
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-AUTH_USER_MODEL = 'customuser.CustomUser'
-AUTHENTICATION_BACKENDS = ['customuser.backends.CustomUserBackend']
-
-import os
-from dotenv import load_dotenv
-load_dotenv()
-STRIPE_API_KEY = os.environ.get("STRIPE_API_KEY")
-STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
-
 LOGIN_URL = '/user/login/'
 LOGIN_REDIRECT_URL = 'home'
 
+AUTH_USER_MODEL = 'customuser.CustomUser'
+AUTHENTICATION_BACKENDS = ['customuser.backends.CustomUserBackend']
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
+
+STRIPE_API_KEY = os.environ.get("STRIPE_API_KEY")
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
+
+
+
+
 EMAIL_HOST = os.environ.get("SMTP_SERVER")
 EMAIL_PORT = os.environ.get("SMTP_PORT")
 EMAIL_USE_TLS = True
 
 EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
-
-
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get("CLIENT_ID")
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET =  os.environ.get("CLIENT_SECRET")
-JSON_CREDENTIALS = os.environ.get("JSON_CREDENTIALS")
