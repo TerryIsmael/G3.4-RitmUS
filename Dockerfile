@@ -8,8 +8,12 @@ COPY . /app
 
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
+RUN python RitmUS/manage.py makemigrations --no-input
+RUN python RitmUS/manage.py migrate --no-input
+RUN python RitmUS/manage.py collectstatic --no-input
+RUN python RitmUS/populate_data.py
 
 EXPOSE 8000
 
 
-CMD ["sh", "runDocker.sh"]
+CMD ["python", "RitmUS/manage.py", "runserver", "0.0.0.0:8000" ]
